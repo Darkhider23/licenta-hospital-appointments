@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Cairo:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Cairo:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Open+Sans&family=Pacifico&display=swap');
+*{
+  margin:0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.navbar-home{
+    background-color: white;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: 1.2rem;
+    position: sticky;
+    top:0;
+    z-index:999;
+}
+.navbar-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    width:100%;
+}
+
+.navbar-logo{
+    color: grey;
+    justify-self: start;
+    margin-left: 2rem;
+    cursor: pointer;
+    text-decoration: none;
+    font-size:1.5rem;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    font-family: Alkatra, sans-serif;
+    font-weight: 300;
+    width: 60vh;
+}
+.navbar-logo:hover {
+    text-decoration: none;
+}
+.navbar-logo img{
+    height: 3rem;
+}
+
+.nav-menu{
+    display: grid;
+    grid-template-columns: repeat(6,auto);
+    grid-gap: 10px;
+    list-style: none;
+    text-align: center;
+    width: 60vw;
+    justify-content: end;
+    margin-right: 2rem;
+    /* margin-left:5rem; */
+}
+
+.nav-item{
+    height: 80px;
+}
+.nav-links{
+    color: black;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    height: 100%;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 600;
+    font-size:18px;
+}
+.nav-links :hover{
+text-decoration: underline;
+}
+.active-link{
+    color: black;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    height: 100%;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 600;
+    font-size:18px;
+    background-color: #0080FF80;
+    border-bottom-left-radius:30%;
+    border-bottom-right-radius:30%;
+    transition: all 1s;
+}
