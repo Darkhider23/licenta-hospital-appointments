@@ -1,7 +1,13 @@
-.page-container{
-  height:1000px;
-  background-color: #ebf2f3;
+#root {
+  background-image: url('./assets/background.jpg');
+  background-size: cover;
 }
-.active-link{
+
+.page-container {
+  height: 1000px;
+}
+
+.active-link {
   font-size: 100px;
 }
+

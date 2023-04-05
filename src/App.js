@@ -1,20 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import Home from "./pages/Home.jsx"
-import NavbarPage from './components/NavbarPage.jsx'
-import Footer from './components/Footer.jsx'
-import Contact from './pages/Contact.jsx'
-import Doctors from './pages/Doctors.jsx'
-import Shop from './pages/Shop.jsx'
-import Prices from './pages/Prices.jsx'
-import Specializations from './pages/Specializations.jsx'
-import Locations from './pages/Locations.jsx'
+import {Routes, Route} from 'react-router-dom'
+import Home from "./pages/Home/Home"
+import NavbarPage from './components/NavbarPage'
+import Footer from './components/Footer'
+import Contact from './pages/Contact/Contact'
+import Doctors from './pages/Doctors/Doctors'
+import Shop from './pages/Shop/Shop'
+import Prices from './pages/Prices/Prices'
+import Specializations from './pages/Specializations/Specializations'
+import Locations from './pages/Locations/Locations'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import {faPhone} from '@fortawesome/free-solid-svg-icons'
+import ImageUpload from './pages/Utils/ImageUpload';
 library.add(faFacebookF,faInstagram, faPhone);
 function App() {
+  
   return (
     <>
     <NavbarPage/>
@@ -23,11 +24,13 @@ function App() {
         {<Route path='/' element= {<Home/>}/>}
         {<Route path='/home' element= {<Home/>}/>}
         {<Route path='/contact' element= {<Contact/>}/>}
-        {<Route path='/medicii' element= {<Doctors/>}/>}
-        {<Route path='/preturi' element= {<Prices/>}/>}
+        {<Route path='/doctors' element= {<Doctors/>}/>}
+        {<Route path='/prices' element= {<Prices/>}/>}
         {<Route path='/shop' element= {<Shop/>}/>}
-        {<Route path='/specialitati' element= {<Specializations/>}/>}
-        {<Route path='/locatii' element= {<Locations/>}/>}
+        {<Route path='/specializations' element= {<Specializations/>}/>}
+        {<Route path='/locations' element= {<Locations/>}/>}
+        {<Route path='/imageupload' element= {<ImageUpload/>}/>}
+
       </Routes>
     </div>
     <Footer/>

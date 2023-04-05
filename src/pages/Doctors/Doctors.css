@@ -1,0 +1,11 @@
+.card-container ul{
+    flex-wrap: wrap;
+    display: inline-flex;
+    margin-top:2%;
+    gap:10px;
+}
+.card-container ul li{
+    width: 30%;
+    margin:1%;
+    background-color: rgba(255, 255, 255, 0.144);
+}

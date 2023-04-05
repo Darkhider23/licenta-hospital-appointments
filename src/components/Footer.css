@@ -9,6 +9,7 @@
     justify-content: center;
     gap: 35rem;
     font-family: Roboto, sans-serif;
+    background-color: rgba(255,255,255,0.1);
 }
 .left-side .right-side{
     flex:50%;
@@ -46,4 +47,7 @@
     justify-content: center;
     gap:50px;
     align-items:center;
+}
+.right-side, .site-mark{
+    color: rgba(27,34,36,70);
 }
