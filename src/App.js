@@ -12,7 +12,8 @@ import Locations from './pages/Locations/Locations'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import {faPhone} from '@fortawesome/free-solid-svg-icons'
-import ImageUpload from './pages/Utils/ImageUpload';
+import AddDoctor from './pages/Utils/AddDoctor';
+import LoginForm from './pages/LoginForm/LoginForm';
 library.add(faFacebookF,faInstagram, faPhone);
 function App() {
   
@@ -26,10 +27,9 @@ function App() {
         {<Route path='/contact' element= {<Contact/>}/>}
         {<Route path='/doctors' element= {<Doctors/>}/>}
         {<Route path='/prices' element= {<Prices/>}/>}
-        {<Route path='/shop' element= {<Shop/>}/>}
         {<Route path='/specializations' element= {<Specializations/>}/>}
-        {<Route path='/locations' element= {<Locations/>}/>}
-        {<Route path='/imageupload' element= {<ImageUpload/>}/>}
+        {<Route path='/adddoctor' element= {<AddDoctor/>}/>}
+        {<Route path='/login' element= {<LoginForm/>}/>}
 
       </Routes>
     </div>

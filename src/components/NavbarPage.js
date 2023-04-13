@@ -31,18 +31,8 @@ function NavbarPage() {
             </NavLink>
           </li>
           <li className='nav-item'>
-            <NavLink to ={'/locations'} className={(navData)=>(navData.isActive ? "active-link" : "nav-links")} >
-              Locatii
-            </NavLink>
-          </li>
-          <li className='nav-item'>
             <NavLink to ={'/specializations'} className={(navData)=>(navData.isActive ? "active-link" : "nav-links")} >
               Specialitati
-            </NavLink>
-          </li>
-          <li className='nav-item'>
-            <NavLink to ={'/prices'} className={(navData)=>(navData.isActive ? "active-link" : "nav-links")} >
-              Preturi
             </NavLink>
           </li>
           <li className='nav-item'>
@@ -51,8 +41,13 @@ function NavbarPage() {
             </NavLink>
           </li>
           <li className='nav-item'>
-            <NavLink to ={'/imageupload'} className={(navData)=>(navData.isActive ? "active-link" : "nav-links")}>
-              ImageUpload
+            <NavLink to ={'/adddoctor'} className={(navData)=>(navData.isActive ? "active-link" : "nav-links")}>
+              AddDoc
+            </NavLink>
+          </li>
+          <li className='nav-item'>
+            <NavLink to ={'/login'} className={(navData)=>(navData.isActive ? "active-link" : "nav-links")}>
+              Login
             </NavLink>
           </li>
           </ul>

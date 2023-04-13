@@ -1,32 +1,36 @@
-// Import dependencies
-const mongoose = require('mongoose');
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = require('../database/db');
 
-// Create a schema for the entity
-const doctorSchema = new mongoose.Schema({
+module.exports = (sequelize,DataTypes) =>{
+const Doctor = sequelize.define('Doctor', {
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+  },
   name: {
-    type: String,
-    required: true
+    type: DataTypes.STRING,
+    allowNull: false,
   },
   surname: {
-    type: String,
-    required: true
+    type: DataTypes.STRING,
+    allowNull: false,
   },
   specialization: {
-    type: String,
-    required: true
+    type: DataTypes.STRING,
+    allowNull: false,
   },
   image: {
-    type: String,
-    required: true
+    type: DataTypes.STRING,
+    allowNull: true,
   },
   rating: {
-    type: String,
-    required: true
+    type: DataTypes.FLOAT,
+    allowNull: false,
   },
-  // Add more properties to your entity schema as needed
+}, {
+  tableName: 'doctor', // Optional, set the table name explicitly
 });
-
-// Create a model for the entity using the schema
-const Doctors = mongoose.model('Doctors', doctorSchema);
-
-module.exports = Doctors;
+return Doctor;
+}
