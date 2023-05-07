@@ -1,18 +1,34 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../database/db');
-const bcrypt = require('bcrypt');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../database/db')
+const { encrypt, decrypt } = require('../utils/crypto');
 
-module.exports = (sequelize,DataTypes) =>{
 const User = sequelize.define('User', {
-  id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-  },
-  name: {
+  firstname: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true,
+    set(value) {
+      const encryptedData = encrypt(value);
+      this.setDataValue('firstname', encryptedData);
+      console.log(this.firstname);
+    },
+    get() {
+      const encryptedData = this.getDataValue('firstname');
+      return decrypt(encryptedData);
+    },
+  },
+  lastname: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    set(value) {
+      const encryptedData= encrypt(value);
+      this.setDataValue('lastname', encryptedData);
+    },
+    get() {
+      const encryptedData = this.getDataValue('lastname');
+      return decrypt(encryptedData);
+    },
   },
   email: {
     type: DataTypes.STRING,
@@ -22,12 +38,17 @@ const User = sequelize.define('User', {
   password: {
     type: DataTypes.STRING,
     allowNull: false,
-  },
+    set(value) {
+      const encryptedData = encrypt(value);
+      this.setDataValue('password', encryptedData);
+    },
+    get() {
+      const encryptedData = this.getDataValue('password');
+      return decrypt(encryptedData);
+    },
+  }
+},{
+  tableName:'users'
 });
 
-User.prototype.validatePassword = async function(password) {
-    return await bcrypt.compare(password, this.password);
-  };
-
-return User;
-}
+module.exports = User;

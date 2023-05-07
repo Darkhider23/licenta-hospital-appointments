@@ -21,13 +21,14 @@ app.use(function (req, res, next) {
 });
 
 app.use(express.json());
-const db = require("./Models");
-const doctorRouter = require('./Routes/Doctors')
+const sequelize = require('./database/db');
 const userRouter = require('./Routes/User')
-app.use("/user",userRouter)
-app.use("/doctors",doctorRouter)
+const doctorRouter = require('./Routes/Doctor');
 
-db.sequelize.sync().then(()=>{
+app.use("/user",userRouter);
+app.use("/doctor",doctorRouter);
+
+sequelize.sync().then(()=>{
   app.listen(5000,() =>{
     console.log("Running on port 5000")
   });

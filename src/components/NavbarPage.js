@@ -27,7 +27,7 @@ function NavbarPage() {
           </li>
           <li className='nav-item'>
             <NavLink to ={'/doctors'} className={(navData)=>(navData.isActive ? "active-link" : "nav-links")} > 
-              Medicii
+              Medici
             </NavLink>
           </li>
           <li className='nav-item'>

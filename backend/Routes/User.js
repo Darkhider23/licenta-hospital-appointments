@@ -1,22 +1,91 @@
 const express = require('express');
 const router = express.Router();
-const UserController = require('../Controllers/UserCTRL');
+const User = require('../Models/User');
+const login = require('../controllers/Login');
 
-// Create a new user
-router.post('/register', UserController.createUser);
+router.post('/login',login);
 
-// Get all users
-router.get('/', UserController.getUsers);
+router.get('/', async (req, res) => {
+  try {
+    const users = await User.findAll();
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+router.post('/register', async (req, res) => {
+  const { firstname, lastname, email, password } = req.body;
 
-// Get a specific user by ID
-router.get('/:id', UserController.getUserById);
+  try {
+    const user = await User.create({
+      firstname,
+      lastname,
+      email,
+      password,
+    });
 
-// Update a specific user by ID
-router.put('/:id', UserController.updateUser);
+    res.status(201).json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
-// Delete a specific user by ID
-router.delete('/:id', UserController.deleteUser);
+router.get('/:id', async (req, res) => {
+  const id = req.params.id;
 
-router.post('/login',UserController.login);
+  try {
+    const user = await User.findByPk(id);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.put('/:id', async (req, res) => {
+  const id = req.params.id;
+  const { firstname, lastname, email, password } = req.body;
+
+  try {
+    const user = await User.findByPk(id);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    await user.update({
+      firstname,
+      lastname,
+      email,
+      password,
+    });
+
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.delete('/:id', async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const user = await User.findByPk(id);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    await user.destroy();
+
+    res.status(204).send();
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 module.exports = router;

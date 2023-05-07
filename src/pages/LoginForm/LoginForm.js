@@ -35,24 +35,24 @@ function LoginForm(){
     const handleSignUp = (event) =>{
         event.preventDefault();
         console.log(name,email,password,role);
-        // fetch('http://localhost:5000/user/register', {
-        //   method: 'POST',
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //   },
-        //   body: JSON.stringify({
-        //     name,
-        //     email,
-        //     password
-        //   }),
-        // })
-        //   .then((response) => response.json())
-        //   .then((data) => {
-        //     console.log('Form data submitted:', data);
-        //   })
-        //   .catch((error) => {
-        //     console.error('Error submitting form:', error);
-        //   });
+        fetch('http://localhost:5000/user/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            password
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('Form data submitted:', data);
+          })
+          .catch((error) => {
+            console.error('Error submitting form:', error);
+          });
     }
     const handleFormChange = () =>{
         setEmail('');

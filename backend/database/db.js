@@ -1,10 +1,9 @@
-// database/db.js
-
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('your_db_name', 'your_db_username', 'your_db_password', {
-  host: 'localhost',
-  dialect: 'mysql'
+const sequelize = new Sequelize('hospitaldb', 'root', 'hospital', {
+  host: '127.0.0.1',
+  port:'3306',
+  dialect: 'mysql',
 });
 
 module.exports = sequelize;
