@@ -19,6 +19,15 @@ function decrypt(encrypted) {
   decrypted += decipher.final('utf8');
   return pkcs7.unpad(Buffer.from(decrypted)).toString();
 }
+// const id = 1;
+// const idstring = id.toString();
+// console.log(typeof idstring);
+// const encryptedint = encrypt(idstring);
+// console.log(encryptedint);
+// const res = decrypt(encryptedint);
+// console.log(typeof res);
+// const result = parseInt(res);
+// console.log(typeof result);
 
 module.exports = {
   encrypt,

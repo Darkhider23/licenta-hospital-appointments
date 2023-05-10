@@ -3,7 +3,8 @@ const router = express.Router();
 const Doctor = require('../Models/Doctor');
 const login = require('../controllers/Login');
 
-router.post('/login', login)
+
+router.post('/login', login);
 
 router.get('/', async (req, res) => {
     try {

@@ -24,9 +24,14 @@ app.use(express.json());
 const sequelize = require('./database/db');
 const userRouter = require('./Routes/User')
 const doctorRouter = require('./Routes/Doctor');
+const appointmentRouter = require('./Routes/Appointment');
+const imageRouter = require('./Routes/ImageUpload');
 
 app.use("/user",userRouter);
 app.use("/doctor",doctorRouter);
+app.use("/appointment",appointmentRouter);
+app.use("/image",imageRouter);
+app.use(express.static('uploads'));
 
 sequelize.sync().then(()=>{
   app.listen(5000,() =>{
