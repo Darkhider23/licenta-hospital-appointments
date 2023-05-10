@@ -5,10 +5,7 @@ import NavbarPage from './components/NavbarPage'
 import Footer from './components/Footer'
 import Contact from './pages/Contact/Contact'
 import Doctors from './pages/Doctors/Doctors'
-import Shop from './pages/Shop/Shop'
-import Prices from './pages/Prices/Prices'
 import Specializations from './pages/Specializations/Specializations'
-import Locations from './pages/Locations/Locations'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import {faPhone} from '@fortawesome/free-solid-svg-icons'
@@ -26,7 +23,6 @@ function App() {
         {<Route path='/home' element= {<Home/>}/>}
         {<Route path='/contact' element= {<Contact/>}/>}
         {<Route path='/doctors' element= {<Doctors/>}/>}
-        {<Route path='/prices' element= {<Prices/>}/>}
         {<Route path='/specializations' element= {<Specializations/>}/>}
         {<Route path='/adddoctor' element= {<AddDoctor/>}/>}
         {<Route path='/login' element= {<LoginForm/>}/>}

@@ -14,19 +14,29 @@ function Card(props) {
     // }
     return (
         <div className="card">
-            <img src={props.image} alt={props.title} />
+            <img src={props.image} alt="" />
             <div className="card-body">
-                <h5 className="card-title">{props.title}</h5>
-                <p className="card-text">{props.subtitle}</p>
+                <div className="title">
+                <h5 className="card-title">Dr. {props.firstname}</h5>
+                <h5 className="card-title">{props.lastname}</h5>
+                </div>
+                <div className="specialization">
+                <h5>{props.content}</h5>
+                </div>
+                <div className="rating">
+                    <button><i className='bx bx-time'></i>Make appointment</button>
+                    <h5>{props.rating}</h5>
+                </div>
             </div>
         </div>
     );
 }
 
 Card.propTypes = {
-    title: PropTypes.string.isRequired,
-    subtitle: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+    firstname: PropTypes.string.isRequired,
+    lastname: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    rating:PropTypes.number.isRequired,
 };
 
 export default Card;

@@ -1,6 +1,51 @@
-.page-container{
-    display: flex;
+.card *{
+    border:1px solid red;
+}
+.card{
+    background-color: rgba(255, 255, 255, 0.404);
+    overflow: hidden;
+    width: 300px;
 }
 .card img{
-    height: 100px;
+    height: 250px;
+    width: 100%;
+    object-fit:cover;
+}
+.card img:hover{
+    transform: scale(1.1);
+    transition: transform 0.4s ease-in-out;
+}
+.card .card-body{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.card .card-body .title{
+    gap: 10px;
+}
+.card .card-body .card-title{
+    text-transform: capitalize;
+    font-size: 25px;
+    color:black
+}
+.card .card-body .specialization{
+    text-transform: capitalize;
+}
+.card .card-body .rating{
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+}
+.rating button{
+    font-size:15px;
+    background-color: transparent;
+    border:solid 1px blue;
+    border-radius: 10px;
+    padding: 5px;
+}
+.rating button:hover{
+    background-color: rgba(0, 0, 255, 0.233);
+    transform: scale(1.05);
+    transition: transform 0.4s ease-in-out;
 }

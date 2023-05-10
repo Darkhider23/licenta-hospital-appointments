@@ -1,19 +1,12 @@
 import React, { useEffect, useState } from "react"
 import Card from "../../components/Card";
+
 import axios from 'axios';
-// import sofiapatel from '../../assets/doctor-images/JonathanLee.jpg'
-import marcuswu from '../../assets/doctor-images/doctor2.jpg'
-import sarahkim from '../../assets/doctor-images/doctor3.jpg'
-import jonathanlee from '../../assets/doctor-images/JonathanLee.jpg'
-import rachelgarcia from '../../assets/doctor-images/RachelGarcia.jpg'
 import './Doctors.css'
 function Doctors() {
-  const imagesMap = {
-    sofiapatel : '../../assets/doctor-images/JonathanLee.jpg'
-  }
   const [data, setData] = useState();
   useEffect(() => {
-    axios.get('http://localhost:5000/doctors')
+    axios.get('http://localhost:5000/doctor')
       .then(response => { console.log(response.data); setData(response.data) })
       .catch(error => console.log(error))
   }, []);
@@ -24,12 +17,13 @@ function Doctors() {
         {data ? (
           <ul className="card-list">
             {data.map(item => (
-              <li className="card-element" key={item._id}>
+              <li className="card-element" key={item.id}>
                 <Card
-                title={item._name}
-                subtitle={item._description}
-                // image={`${item._name}${item._surname}`}
-                image={item._image}
+                firstname={item.firstname}
+                lastname={item.lastname}
+                content={item.specialization}
+                rating={item.rating}
+                image={`doctor-images/${item.firstname}${item.lastname}.jpg`}
               /></li>
             ))}
           </ul>
