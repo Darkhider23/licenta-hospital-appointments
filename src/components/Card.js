@@ -25,7 +25,7 @@ function Card(props) {
                 </div>
                 <div className="rating">
                     <button><i className='bx bx-time'></i>Make appointment</button>
-                    <h5>{props.rating}</h5>
+                    <h5><span>{'\u2605'}</span>{props.rating}</h5>
                 </div>
             </div>
         </div>

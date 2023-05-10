@@ -1,8 +1,28 @@
-.add-doctor-container {
+.admin-container {
     margin:auto;
     min-width: 30%;
+    display:flex;
+    flex-direction: column;
+    gap:10px;
 }
-  
+.open-button{
+  display: flex;
+  justify-content: center;
+}
+.open-button button{
+  width: 30%;
+  height: 50px;
+}
+ .close-button{
+  display: flex;
+  justify-content: flex-end;
+ }
+ .close-button button{
+  color:#08d;
+  background-color: transparent;
+  font-size: 20px;
+  border:none;
+ }
   .form {
     margin-top:-10em;
     background-color: #15172b;

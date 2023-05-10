@@ -9,14 +9,14 @@ import Specializations from './pages/Specializations/Specializations'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import {faPhone} from '@fortawesome/free-solid-svg-icons'
-import AddDoctor from './pages/Utils/AddDoctor';
+import Admin from './pages/Utils/Admin';
 import LoginForm from './pages/LoginForm/LoginForm';
 library.add(faFacebookF,faInstagram, faPhone);
 function App() {
   
   return (
     <>
-    <NavbarPage/>
+    <NavbarPage />
     <div className="page-container">
       <Routes>
         {<Route path='/' element= {<Home/>}/>}
@@ -24,7 +24,7 @@ function App() {
         {<Route path='/contact' element= {<Contact/>}/>}
         {<Route path='/doctors' element= {<Doctors/>}/>}
         {<Route path='/specializations' element= {<Specializations/>}/>}
-        {<Route path='/adddoctor' element= {<AddDoctor/>}/>}
+        {<Route path='/admin' element= {<Admin/>}/>}
         {<Route path='/login' element= {<LoginForm/>}/>}
 
       </Routes>

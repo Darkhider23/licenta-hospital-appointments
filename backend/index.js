@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express();
 require('dotenv').config();
+const cors = require('cors');
 app.use(function (req, res, next) {
 
   // Website you wish to allow to connect
@@ -19,6 +20,9 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
+app.use(cors({
+  origin:'http://localhost:3000'
+}));
 
 app.use(express.json());
 const sequelize = require('./database/db');
@@ -26,11 +30,13 @@ const userRouter = require('./Routes/User')
 const doctorRouter = require('./Routes/Doctor');
 const appointmentRouter = require('./Routes/Appointment');
 const imageRouter = require('./Routes/ImageUpload');
+const searchRouter = require('./utils/search')
 
 app.use("/user",userRouter);
 app.use("/doctor",doctorRouter);
 app.use("/appointment",appointmentRouter);
 app.use("/image",imageRouter);
+app.use("/api",searchRouter);
 app.use(express.static('uploads'));
 
 sequelize.sync().then(()=>{

@@ -31,11 +31,16 @@
 }
 .card .card-body .specialization{
     text-transform: capitalize;
+    font-size: 20px;
 }
 .card .card-body .rating{
     width: 100%;
     display: inline-flex;
     justify-content: space-between;
+}
+.rating span{
+    font-size: 20px;
+  color: gold;
 }
 .rating button{
     font-size:15px;

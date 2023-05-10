@@ -2,15 +2,16 @@ import React from "react";
 import { useState } from "react";
 import './LoginForm.css'
 import Modal from 'react-modal';
-// import { useHistory } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 Modal.setAppElement('#root');
-function LoginForm() {
+function LoginForm(props) {
   const [firstname, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // const history = useHistory();
+  const navigate = useNavigate();
+  const [username,setUsername]=useState();
   const [successForm, setSuccessForm] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
   const customStyles = {
@@ -39,6 +40,12 @@ function LoginForm() {
     })
       .then((response) => response.json())
       .then((data) => {
+        if (data.message === "Login successful") {
+          const {token} = data.token;
+          localStorage.setItem('sessionToken',token);
+          localStorage.setItem('firstname',data.firstname);
+          localStorage.setItem('lastname',data.lastname);
+        }
         setModalMessage(data.message);
         setSuccessForm(true);
       })
@@ -64,6 +71,8 @@ function LoginForm() {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
+        console.log(data.message);
         setModalMessage(data.message);
         setSuccessForm(true);
       })
@@ -111,7 +120,7 @@ function LoginForm() {
           <div className="modal-content">
             <h2>Success!</h2>
             <p>{modalMessage}</p>
-            <button onClick={() => setSuccessForm(false)}>Close</button>
+            <button onClick={() => { setSuccessForm(false); if (modalMessage === "Login successful" || modalMessage === "Register successful") { window.location.reload(); } }}>Close</button>
           </div>
         </Modal>
       </div>

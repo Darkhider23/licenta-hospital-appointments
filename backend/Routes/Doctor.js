@@ -1,10 +1,31 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 const Doctor = require('../Models/Doctor');
-const login = require('../controllers/Login');
 
 
-router.post('/login', login);
+router.post('/login',async (req, res) => {
+    try {
+      const { email, password } = req.body;
+      // Find the user with the given email
+      const encryptedUser = await Doctor.findOne({ where: { email } });
+      if (!encryptedUser) {
+        return res.status(401).json({ message: 'Invalid email' });
+      }
+      // Check if the decrypted password matches the one from the request
+      if (encryptedUser.password !== password) {
+        return res.status(401).json({ message: 'Invalid password' });
+      }
+  
+      // Generate a JWT for the user
+      const token = jwt.sign({ id: encryptedUser.id }, process.env.JWT_SECRET);
+      const message="Login successful";
+      // Send the JWT in the response
+      res.status(200).json({ token, message});
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  })
 
 router.get('/', async (req, res) => {
     try {
