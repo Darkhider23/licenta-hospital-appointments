@@ -11,6 +11,8 @@ import {faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import {faPhone} from '@fortawesome/free-solid-svg-icons'
 import Admin from './pages/Utils/Admin';
 import LoginForm from './pages/LoginForm/LoginForm';
+import MakeAppointment from './pages/MakeAppointment/MakeAppointment';
+import { redirect } from 'react-router-dom';
 library.add(faFacebookF,faInstagram, faPhone);
 function App() {
   
@@ -19,13 +21,14 @@ function App() {
     <NavbarPage />
     <div className="page-container">
       <Routes>
-        {<Route path='/' element= {<Home/>}/>}
+      {<Route path='/' element= {<Home/>}/>}
         {<Route path='/home' element= {<Home/>}/>}
         {<Route path='/contact' element= {<Contact/>}/>}
         {<Route path='/doctors' element= {<Doctors/>}/>}
         {<Route path='/specializations' element= {<Specializations/>}/>}
         {<Route path='/admin' element= {<Admin/>}/>}
         {<Route path='/login' element= {<LoginForm/>}/>}
+        {<Route path='/makeappointment' element= {<MakeAppointment/>}/>}
 
       </Routes>
     </div>

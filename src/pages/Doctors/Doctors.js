@@ -12,13 +12,14 @@ function Doctors() {
   }, []);
 
   return (
-    <>
+    <div className="doctor-page">
       <div className="card-container">
         {data ? (
           <ul className="card-list">
             {data.map(item => (
               <li className="card-element" key={item.id}>
                 <Card
+                id={item.id}
                 firstname={item.firstname}
                 lastname={item.lastname}
                 content={item.specialization}
@@ -64,7 +65,7 @@ function Doctors() {
         subtitle=" Dr. Garcia is a psychiatrist who specializes in treating patients with mood and anxiety disorders. She received her medical degree from Stanford University and completed her residency at McLean Hospital in Belmont, Massachusetts. Dr. Garcia is known for her compassionate and empathetic approach to patient care and her commitment to helping patients improve their mental health and well-being."
         image={RachelGarcia}
       /> */}
-    </>
+    </div>
   )
 }
 export default Doctors;

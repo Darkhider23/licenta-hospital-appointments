@@ -28,13 +28,13 @@ app.use(express.json());
 const sequelize = require('./database/db');
 const userRouter = require('./Routes/User')
 const doctorRouter = require('./Routes/Doctor');
-const appointmentRouter = require('./Routes/Appointment');
 const imageRouter = require('./Routes/ImageUpload');
+const appointmentsRouter = require('./Routes/Appointments');
 const searchRouter = require('./utils/search')
 
 app.use("/user",userRouter);
 app.use("/doctor",doctorRouter);
-app.use("/appointment",appointmentRouter);
+app.use("/appointments",appointmentsRouter);
 app.use("/image",imageRouter);
 app.use("/api",searchRouter);
 app.use(express.static('uploads'));

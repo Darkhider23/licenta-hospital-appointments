@@ -46,7 +46,7 @@ function checkAuth(req, res, next) {
   }
 }
 router.get('/check-auth', checkAuth, (req, res) => {
-  console.log("Helo");
+
   // If the user is authenticated, return their details
   res.json(req.session.user);
 });
