@@ -6,11 +6,10 @@ const Doctor = sequelize.define('Doctor', {
   firstname: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    unique: false,
     set(value) {
       const encryptedData = encrypt(value);
       this.setDataValue('firstname', encryptedData);
-      console.log(this.firstname);
     },
     get() {
       const encryptedData = this.getDataValue('firstname');
@@ -20,7 +19,7 @@ const Doctor = sequelize.define('Doctor', {
   lastname: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    unique: false,
     set(value) {
       const encryptedData= encrypt(value);
       this.setDataValue('lastname', encryptedData);
@@ -38,7 +37,6 @@ const Doctor = sequelize.define('Doctor', {
   password: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
     set(value) {
       const encryptedData= encrypt(value);
       this.setDataValue('password', encryptedData);
@@ -51,7 +49,7 @@ const Doctor = sequelize.define('Doctor', {
   specialization: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    unique: false,
     set(value) {
       const encryptedData= encrypt(value);
       this.setDataValue('specialization', encryptedData);

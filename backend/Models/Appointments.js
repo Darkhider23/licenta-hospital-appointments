@@ -14,11 +14,11 @@ const Appointment = sequelize.define('Appointment', {
   },
   appointmentTime: {
     type: DataTypes.DATE,
-    allowNull: false,
+    allowNull: true,
   },
   startHour: {
     type: DataTypes.TIME,
-    allowNull: false,
+    allowNull: true,
     validate: {
       async notOverlapping() {
         const schedules = await Appointment.findAll({
@@ -66,7 +66,7 @@ const Appointment = sequelize.define('Appointment', {
   },
   endHour: {
     type: DataTypes.TIME,
-    allowNull: false,
+    allowNull: true,
   },
   userId: {
     type: DataTypes.INTEGER,
@@ -97,7 +97,7 @@ const Appointment = sequelize.define('Appointment', {
       },
   },
   status: {
-    type: DataTypes.ENUM('scheduled', 'cancelled', 'completed'),
+    type: DataTypes.ENUM('pending', 'confirmed'),
     allowNull: false,
     defaultValue: 'scheduled',
   },

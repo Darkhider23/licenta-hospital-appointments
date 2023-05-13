@@ -39,7 +39,7 @@ router.post('/register', async (req, res) => {
     const { firstname, lastname, email, password, specialization, rating } = req.body;
 
     try {
-        const user = await Doctor.create({
+        const doctor = await Doctor.create({
             firstname,
             lastname,
             email,
@@ -48,9 +48,12 @@ router.post('/register', async (req, res) => {
             rating,
         });
 
-        res.status(201).json(user);
+        res.status(201).json(doctor);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        // if(error.name==="Validation error"){
+        //     res.status(500).json({message:error.message,errors:error.errors})
+        // }
+        res.status(500).json({message:error.message,errors:error.errors});
     }
 });
 

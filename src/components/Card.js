@@ -17,7 +17,7 @@ function Card(props) {
                 </div>
                 <div className="rating">
                     {props.id && (
-                        <Link
+                        <Link className="button-appointnmet"
                             to={{
                                 pathname: '/makeappointment',
                                 search: `?id=${props.id}`,
@@ -29,7 +29,7 @@ function Card(props) {
                     )}
 
                     {/* <button onClick={handleMakeAppointment}><i className='bx bx-time'></i>Make appointment</button> */}
-                    <h5><span>{'\u2605'}</span>{props.rating}</h5>
+                    <h5><span className="star">{'\u2605'}</span><span className="rate-text">{props.rating}</span></h5>
                 </div>
             </div>
         </div>

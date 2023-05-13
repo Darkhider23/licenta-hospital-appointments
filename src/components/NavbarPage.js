@@ -2,24 +2,27 @@ import { NavLink } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import "./NavbarPage.css"
 import logo from '../assets/logo.png'
-import { first } from 'lodash';
 function NavbarPage(props) {
-  const [token, setToken] = useState(localStorage.getItem('sessionToken'));
   const [firstname, setFirstname] = useState(localStorage.getItem('firstname'));
   const [lastname, setLastname] = useState(localStorage.getItem('lastname'));
+  const [userId,setUserId] = useState(localStorage.getItem('userId'));
   useEffect(() => {
-    setToken(localStorage.getItem('sessionToken'));
-    setFirstname(localStorage.getItem('firstname'));
-    setLastname(localStorage.getItem('lastname'));
-  }, [token]);
+   fetch(`http://localhost:5000/user/${userId}`,{
+    method:'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+   })
+   .then((response)=> response.json())
+   .then((data)=>{
+    setFirstname(data.firstname);
+    setLastname(data.lastname);
+   })
+  },[userId]);
   const click = useState();
   const handleLogout = () => {
-    localStorage.removeItem('sessionToken');
-    localStorage.removeItem('firstname');
-    localStorage.removeItem('lastname');
-    setToken(null);
-    setFirstname('');
-    setLastname('');
+    localStorage.removeItem('userId');
+    setUserId('');
   };
 
   return (
@@ -65,10 +68,11 @@ function NavbarPage(props) {
           </li>
 
           {
-            token ? <>
+            userId ? <>
               <li className='nav-item'>
                 <NavLink to={'/user-page'} className={(navData) => (navData.isActive ? "active-link username" : "nav-links username")}>
-                  {firstname} {lastname}
+                  <span>{firstname}</span>
+                  <span>{lastname}</span>
                 </NavLink>
               </li>
               <div className="logout-container">

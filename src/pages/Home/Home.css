@@ -17,7 +17,7 @@
     font-size: 1.2em;
     padding-left: 1.5em;
   }
-  .motto h1,h2{
+  .motto h1,.motto h2{
     background: rgb(8, 66, 107);
 background: linear-gradient(90deg, rgba(18,156,255,1) 0%, rgba(65,159,210,1) 50%, rgb(135, 170, 211) 100%);
     filter:contrast(120%);
@@ -42,6 +42,7 @@ background: linear-gradient(90deg, rgba(18,156,255,1) 0%, rgba(65,159,210,1) 50%
     display: flex;
     justify-content: center;
     padding-bottom: 1.5rem;
+    font-size:px;
   }
   .content{
     margin:0 3rem 1rem 3rem;
@@ -49,4 +50,6 @@ background: linear-gradient(90deg, rgba(18,156,255,1) 0%, rgba(65,159,210,1) 50%
   .make-appointment, .help-by-specialist, .diagnostic-report{
     background-color: rgba(204, 226, 243, 0.5);
     border-radius: 30px;
+    height: 300px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   }

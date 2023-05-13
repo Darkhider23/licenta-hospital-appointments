@@ -2,10 +2,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top:10vh;
 }
 .card-container ul{
     flex-wrap: wrap;
     display: flex;
     margin-top:2%;
     gap:50px;
+}
+.card-container ul li{
+    list-style: none;
 }

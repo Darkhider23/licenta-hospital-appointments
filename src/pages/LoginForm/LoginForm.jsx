@@ -41,10 +41,7 @@ function LoginForm(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.message === "Login successful") {
-          const {token} = data.token;
-          localStorage.setItem('sessionToken',token);
-          localStorage.setItem('firstname',data.firstname);
-          localStorage.setItem('lastname',data.lastname);
+          localStorage.setItem('userId',data.id)
         }
         setModalMessage(data.message);
         setSuccessForm(true);

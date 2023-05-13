@@ -26,6 +26,21 @@ router.get('/', async (req, res) => {
   }
 });
 
+//Get the appointments of doctor
+router.get('/doctor-appointments/:doctorId',async(req,res)=>{
+  try {
+    const { doctorId } = req.params;
+    const appointments = await Appointment.findAll({
+      where: {
+        doctorId: doctorId
+      }
+    });
+    res.json(appointments);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+})
 // Get appointment by ID
 router.get('/:id', async (req, res) => {
   try {

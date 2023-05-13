@@ -101,6 +101,10 @@
 
 .username {
     text-transform: capitalize;
+    display: flex;
+    flex-direction: column;
+    font-size:16.5px;
+    text-decoration: none;
 }
 
 .nav-links :hover {
