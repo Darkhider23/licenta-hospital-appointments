@@ -41,7 +41,8 @@ function LoginForm(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.message === "Login successful") {
-          localStorage.setItem('userId',data.id)
+          localStorage.setItem('userId',data.id);
+          localStorage.setItem('role',data.role);
         }
         setModalMessage(data.message);
         setSuccessForm(true);
@@ -117,7 +118,7 @@ function LoginForm(props) {
           <div className="modal-content">
             <h2>Success!</h2>
             <p>{modalMessage}</p>
-            <button onClick={() => { setSuccessForm(false); if (modalMessage === "Login successful" || modalMessage === "Register successful") { window.location.reload(); } }}>Close</button>
+            <button onClick={() => { setSuccessForm(false); if (modalMessage === "Login successful" || modalMessage === "Register successful") { window.location.href='/home' } }}>Close</button>
           </div>
         </Modal>
       </div>

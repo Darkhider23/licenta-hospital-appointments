@@ -7,6 +7,7 @@ function NavbarPage(props) {
   const [lastname, setLastname] = useState(localStorage.getItem('lastname'));
   const [userId,setUserId] = useState(localStorage.getItem('userId'));
   useEffect(() => {
+    console.log(userId);
    fetch(`http://localhost:5000/user/${userId}`,{
     method:'GET',
     headers: {
@@ -53,7 +54,7 @@ function NavbarPage(props) {
           </li>
           <li className='nav-item'>
             <NavLink to={'/specializations'} className={(navData) => (navData.isActive ? "active-link" : "nav-links")} >
-              Specialitati
+              Specializari
             </NavLink>
           </li>
           <li className='nav-item'>

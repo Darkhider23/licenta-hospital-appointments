@@ -63,6 +63,18 @@ const Doctor = sequelize.define('Doctor', {
     type: DataTypes.FLOAT,
     allowNull: false,
     unique: false,
+  },
+  role:{
+    type:DataTypes.STRING,
+    allowNull:false,
+    set(value) {
+      const encryptedData= encrypt(value);
+      this.setDataValue('role', encryptedData);
+    },
+    get() {
+      const encryptedData = this.getDataValue('role');
+      return decrypt(encryptedData);
+    },
   }
   
 },{

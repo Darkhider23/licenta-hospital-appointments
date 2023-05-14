@@ -33,38 +33,11 @@ router.post('/login',async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 })
-
-function checkAuth(req, res, next) {
-  console.log(req.session.user);
-  if (req.session.user) {
-    // If the user is authenticated, call the next middleware
-    next();
-  } else {
-    // If the user is not authenticated, return an error response
-    res.status(401).json({ error: 'Unauthorized' });
-  }
-}
-router.get('/check-auth', checkAuth, (req, res) => {
-
-  // If the user is authenticated, return their details
-  res.json(req.session.user);
-});
 router.post('/logout', (req, res) => {
   // Destroy the user's session data
   req.session.destroy();
   res.json({ success: true });
 });
-
-
-router.get('/details',(req,res)=>{
-  if(req.session.user){
-    console.log(req.session.user)
-    res.send(req.session.user);
-  }else{
-    res.sendStatus(401);
-  }
-})
-
 router.get('/', async (req, res) => {
   try {
     const users = await User.findAll();
@@ -75,13 +48,14 @@ router.get('/', async (req, res) => {
 });
 router.post('/register', async (req, res) => {
   const { firstname, lastname, email, password } = req.body;
-
+  const role = "pacient"
   try {
     const user = await User.create({
       firstname,
       lastname,
       email,
       password,
+      role,
     });
     const message = "Register successful";
     res.status(201).json({ user, message });
@@ -108,7 +82,7 @@ router.get('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   const id = req.params.id;
-  const { firstname, lastname, email, password } = req.body;
+  const { firstname, lastname, email, password, role } = req.body;
 
   try {
     const user = await User.findByPk(id);
@@ -122,6 +96,7 @@ router.put('/:id', async (req, res) => {
       lastname,
       email,
       password,
+      role,
     });
 
     res.status(200).json(user);

@@ -1,0 +1,54 @@
+.specializations-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.specializations-container .search-container .search-bar{
+    margin-top:10vh;
+    display: flex;
+    align-items: center;
+}
+.specializations-container .search-container .search-bar input{
+    height: 40px;
+    width: 40vh;
+    border-radius: 10px;
+    border:none;
+    padding: 10px;
+}
+.specializations-container .search-container .search-bar input:focus-visible{
+outline:none;
+}
+.specializations-container .search-container .search-bar i{
+    font-size: 20px;
+    margin-left:-25px;
+}
+.specializations-container .search-container ul{
+    width: 40vh;
+    padding-top:1vh;
+    padding-bottom:1vh;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    /* border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px; */
+    
+}
+.specializations-container .search-container ul li{
+    font-size:20px;
+    background-color: #0080FF80;
+    box-shadow: 2px 5px 16px 0px #0B325E, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+    border-radius:10px;
+    padding:10px;
+}
+.specializations-container .card-container{
+    display: flex;
+    gap: 30vh;
+    margin-top:10vh;
+}
+.specializations-container .card{
+    border:1px solid red;
+    height: 300px;
+    padding: 10px;
+}

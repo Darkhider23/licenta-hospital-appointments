@@ -37,6 +37,7 @@ router.get('/', async (req, res) => {
 });
 router.post('/register', async (req, res) => {
     const { firstname, lastname, email, password, specialization, rating } = req.body;
+    const role ="doctor";
 
     try {
         const doctor = await Doctor.create({
@@ -46,6 +47,7 @@ router.post('/register', async (req, res) => {
             password,
             specialization,
             rating,
+            role,
         });
 
         res.status(201).json(doctor);
@@ -75,7 +77,7 @@ router.get('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     const id = req.params.id;
-    const { firstname, lastname, email, password, specialization, rating } = req.body;
+    const { firstname, lastname, email, password, specialization, rating,role } = req.body;
 
     try {
         const user = await Doctor.findByPk(id);
@@ -91,6 +93,7 @@ router.put('/:id', async (req, res) => {
             password,
             specialization,
             rating,
+            role,
         });
 
         res.status(200).json(user);

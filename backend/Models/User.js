@@ -46,7 +46,19 @@ const User = sequelize.define('User', {
       const encryptedData = this.getDataValue('password');
       return decrypt(encryptedData);
     },
-  }
+  },
+  role:{
+    type:DataTypes.STRING,
+    allowNull:false,
+    set(value) {
+      const encryptedData = encrypt(value);
+      this.setDataValue('role', encryptedData);
+    },
+    get() {
+      const encryptedData = this.getDataValue('role');
+      return decrypt(encryptedData);
+    },
+    }
 },{
   tableName:'users'
 });
