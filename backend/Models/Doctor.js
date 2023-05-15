@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../database/db')
+const sequelize = require('../database/db');
 const { encrypt, decrypt } = require('../utils/crypto');
+const Specializations = require('./Specializations');
 
 const Doctor = sequelize.define('Doctor', {
   firstname: {
@@ -21,7 +22,7 @@ const Doctor = sequelize.define('Doctor', {
     allowNull: false,
     unique: false,
     set(value) {
-      const encryptedData= encrypt(value);
+      const encryptedData = encrypt(value);
       this.setDataValue('lastname', encryptedData);
     },
     get() {
@@ -38,24 +39,11 @@ const Doctor = sequelize.define('Doctor', {
     type: DataTypes.STRING,
     allowNull: false,
     set(value) {
-      const encryptedData= encrypt(value);
+      const encryptedData = encrypt(value);
       this.setDataValue('password', encryptedData);
     },
     get() {
       const encryptedData = this.getDataValue('password');
-      return decrypt(encryptedData);
-    },
-  },
-  specialization: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: false,
-    set(value) {
-      const encryptedData= encrypt(value);
-      this.setDataValue('specialization', encryptedData);
-    },
-    get() {
-      const encryptedData = this.getDataValue('specialization');
       return decrypt(encryptedData);
     },
   },
@@ -64,21 +52,30 @@ const Doctor = sequelize.define('Doctor', {
     allowNull: false,
     unique: false,
   },
-  role:{
-    type:DataTypes.STRING,
-    allowNull:false,
+  role: {
+    type: DataTypes.STRING,
+    allowNull: false,
     set(value) {
-      const encryptedData= encrypt(value);
+      const encryptedData = encrypt(value);
       this.setDataValue('role', encryptedData);
     },
     get() {
       const encryptedData = this.getDataValue('role');
       return decrypt(encryptedData);
     },
-  }
-  
-},{
-    tableName: 'doctor'
-})
+  },
+  specializationId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: Specializations,
+      key: 'id',
+    },
+  },
+}, {
+  tableName: 'doctor'
+});
+
+Doctor.belongsTo(Specializations, { foreignKey: 'specializationId' });
 
 module.exports = Doctor;

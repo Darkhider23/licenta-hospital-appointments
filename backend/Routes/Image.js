@@ -3,18 +3,17 @@ const multer = require('multer');
 const fs = require('fs');
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
-const  Image  = require('../Models/Image');
-const encrypt = require('../utils/crypto');
+const Image = require('../Models/Image');
+const {encrypt} = require('../utils/crypto');
 
 router.get('/', async (req, res) => {
-    try {
-      const images = await Image.findAll();
-      res.status(200).json(images);
-    } catch (error) {
-      res.status(500).json({ error: 'Error retrieving images' });
-    }
-  });
-
+  try {
+    const images = await Image.findAll();
+    res.status(200).json(images);
+  } catch (error) {
+    res.status(500).json({ error: 'Error retrieving images' });
+  }
+});
 
 router.post('/upload', upload.single('image'), async (req, res) => {
   try {
@@ -56,7 +55,7 @@ router.get('/:name', async (req, res) => {
       res.status(404).json({ error: 'Image not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Error retrieving image' });
+    res.status(500).json({ error: 'Error retrieving image', message: error.message });
   }
 });
 

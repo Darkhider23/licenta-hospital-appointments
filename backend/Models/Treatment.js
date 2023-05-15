@@ -1,8 +1,8 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/db');
-const Specializations = require('./Specializations');
+const Diseases = require('./Diseases');
 
-const Diseases = sequelize.define('Diseases', {
+const Treatment = sequelize.define('Treatment', {
     name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -13,16 +13,16 @@ const Diseases = sequelize.define('Diseases', {
         allowNull: false,
         unique: true,
     },
-    specializationsId: {
+    diseasesId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: Specializations,
+            model: Diseases,
             key: 'id',
         },
     },
 });
 
-Diseases.belongsTo(Specializations, { foreignKey: 'specializationsId' });
+Treatment.belongsTo(Diseases, { foreignKey: 'diseasesId' });
 
-module.exports = Diseases;
+module.exports = Treatment;

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const Doctor = require('../Models/Doctor');
+const Specializations = require('../Models/Specializations')
 
 
 router.post('/login',async (req, res) => {
@@ -26,7 +27,30 @@ router.post('/login',async (req, res) => {
       res.status(500).json({ message: error.message });
     }
   })
+router.get('/specializations/:specializationId', async (req, res) => {
+  const { specializationId } = req.params;
 
+  try {
+    const specialization = await Specializations.findByPk(specializationId);
+    if (!specialization) {
+      return res.status(404).json({ message: 'Specialization not found' });
+    }
+
+    const doctors = await Doctor.findAll({
+      include: [
+        {
+          model: Specializations,
+          where: { id: specializationId },
+        },
+      ],
+    });
+
+    res.json(doctors);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+});
 router.get('/', async (req, res) => {
     try {
         const users = await Doctor.findAll();
@@ -36,7 +60,7 @@ router.get('/', async (req, res) => {
     }
 });
 router.post('/register', async (req, res) => {
-    const { firstname, lastname, email, password, specialization, rating } = req.body;
+    const { firstname, lastname, email, password, specializationId, rating } = req.body;
     const role ="doctor";
 
     try {
@@ -45,7 +69,7 @@ router.post('/register', async (req, res) => {
             lastname,
             email,
             password,
-            specialization,
+            specializationId,
             rating,
             role,
         });
@@ -77,7 +101,7 @@ router.get('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     const id = req.params.id;
-    const { firstname, lastname, email, password, specialization, rating,role } = req.body;
+    const { firstname, lastname, email, password, specializationId, rating,role } = req.body;
 
     try {
         const user = await Doctor.findByPk(id);
@@ -91,7 +115,7 @@ router.put('/:id', async (req, res) => {
             lastname,
             email,
             password,
-            specialization,
+            specializationId,
             rating,
             role,
         });

@@ -15,6 +15,23 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/specializations/:specializationId', async (req, res) => {
+    const specializationId = req.params.specializationId;
+  
+    try {
+      const diseases = await Diseases.findAll({
+        where: {
+          specializationsId: specializationId,
+        },
+      });
+  
+      res.json(diseases);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Server Error' , error:error.message });
+    }
+  });
+
 // GET /api/diseases/:id
 // Get a disease by id
 router.get('/:id', async (req, res) => {

@@ -21,7 +21,7 @@ app.use(function (req, res, next) {
   next();
 });
 app.use(cors({
-  origin:'http://localhost:3000'
+  origin: 'http://localhost:3000'
 }));
 
 app.use(express.json());
@@ -34,19 +34,21 @@ const specializationsRouter = require('./Routes/Specializations')
 const diseasesRouter = require('./Routes/Diseases')
 const symptomsRouter = require('./Routes/Diseases')
 const imageRouter = require('./Routes/Image')
+const treatmentRouter = require('./Routes/Treatment')
 
-app.use("/user",userRouter);
-app.use("/doctor",doctorRouter);
-app.use("/appointments",appointmentsRouter);
-app.use("/image",imageRouter);
-app.use("/api",searchRouter);
-app.use("/specializations",specializationsRouter);
-app.use("/diseases",diseasesRouter);
-app.use("/symptoms",symptomsRouter);
+app.use("/user", userRouter);
+app.use("/doctor", doctorRouter);
+app.use("/appointments", appointmentsRouter);
+app.use("/image", imageRouter);
+app.use("/api", searchRouter);
+app.use("/specializations", specializationsRouter);
+app.use("/diseases", diseasesRouter);
+app.use("/symptoms", symptomsRouter);
+app.use("/treatment",treatmentRouter);
 app.use('/uploads', express.static('uploads'));
 
-sequelize.sync().then(()=>{
-  app.listen(5000,() =>{
+sequelize.sync().then(() => {
+  app.listen(5000, () => {
     console.log("Running on port 5000")
   });
 })

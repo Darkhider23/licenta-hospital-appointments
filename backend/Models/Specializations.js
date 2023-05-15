@@ -7,13 +7,13 @@ const Specializations = sequelize.define('Specializations', {
     allowNull: false,
     unique: true,
   },
-  description:{
-    type:DataTypes.STRING,
-    allowNull:false,
-    unique:true,
-  }
-},{
-  tableName:'specializations'
+  description: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+    unique: true,
+  },
+}, {
+  tableName: 'specializations'
 });
 
 module.exports = Specializations;

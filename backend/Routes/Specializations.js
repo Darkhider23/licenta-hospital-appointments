@@ -17,20 +17,20 @@ router.get('/search', async (req, res) => {
   res.json({ results });
 });
 
-// Get all specializations
 router.get('/', async (req, res) => {
   try {
     const specializations = await Specializations.findAll();
     res.json(specializations);
   } catch (error) {
-    console.error(error.message);
-    res.status(500).json({ message: 'Server error' });
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
   }
 });
 
-// Get a single specialization
+// Get a specific specialization
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
+
   try {
     const specialization = await Specializations.findByPk(id);
     if (!specialization) {
@@ -38,54 +38,60 @@ router.get('/:id', async (req, res) => {
     }
     res.json(specialization);
   } catch (error) {
-    console.error(error.message);
-    res.status(500).json({ message: 'Server error' });
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
   }
 });
 
 // Create a new specialization
 router.post('/', async (req, res) => {
-  const { name } = req.body;
+  const { name, description } = req.body;
+
   try {
-    const specialization = await Specializations.create({ name });
+    const specialization = await Specializations.create({ name, description });
     res.status(201).json(specialization);
   } catch (error) {
-    console.error(error.message);
-    res.status(500).json({ message: 'Server error' });
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
   }
 });
 
 // Update a specialization
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
-  const { name } = req.body;
+  const { name, description } = req.body;
+
   try {
     const specialization = await Specializations.findByPk(id);
     if (!specialization) {
       return res.status(404).json({ message: 'Specialization not found' });
     }
     specialization.name = name;
+    specialization.description = description;
     await specialization.save();
+
     res.json(specialization);
   } catch (error) {
-    console.error(error.message);
-    res.status(500).json({ message: 'Server error' });
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
   }
 });
 
 // Delete a specialization
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
+
   try {
     const specialization = await Specializations.findByPk(id);
     if (!specialization) {
       return res.status(404).json({ message: 'Specialization not found' });
     }
     await specialization.destroy();
-    res.json({ message: 'Specialization deleted' });
+
+    res.json({ message: 'Specialization deleted successfully' });
   } catch (error) {
-    console.error(error.message);
-    res.status(500).json({ message: 'Server error' });
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
   }
 });
 
