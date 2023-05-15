@@ -18,7 +18,6 @@ function MakeAppointment() {
             .then((response) => response.json())
             .then((data) => {
                 setDoctor(data);
-                console.log(doctor);
             });
     }, [doctorId]);
 

@@ -1,9 +1,11 @@
 import React, { useState } from "react"
 import './Specializations.css'
+
 function Specializations() {
 
   const [searchQuery, setSearchQuery] = useState('');
   const [results, setResults] = useState([]);
+
 
   async function handleInputChange(event) {
     const query = event.target.value;
@@ -12,20 +14,27 @@ function Specializations() {
     const data = await response.json();
     setResults(data.results);
   }
-
+  function handleSpecializationClick(id) {
+    window.location.href=`/specialization/${id}`;
+  }
+  function handleKeyPress(event) {
+    if (event.key === 'Enter' && results.length > 0) {
+      handleSpecializationClick(results[0].id);
+    }
+  }
 
   return (
     <div className="specializations-container">
       <div className="search-container">
         <div className="search-bar">
           {/* <label htmlFor="search-bar" >Search Specialization</label> */}
-          <input id="search-bar" className="text" value={searchQuery} onChange={handleInputChange} placeholder="Search Specializations" />
+          <input id="search-bar" className="text" value={searchQuery} onChange={handleInputChange} placeholder="Search Specializations"  onKeyPress={handleKeyPress} />
           <i class='bx bx-search' ></i>
         </div>
-        {results.length > 0 && (
+        {results.length > 0 && searchQuery && (
           <ul>
             {results.map(result => (
-              <li key={result.id}>
+              <li key={result.id} onClick={()=>handleSpecializationClick(result.id)}>
                 {result.name}
               </li>
             ))}

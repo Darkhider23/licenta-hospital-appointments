@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import './LoginForm.css'
 import Modal from 'react-modal';
-import { useNavigate } from "react-router-dom";
 Modal.setAppElement('#root');
 function LoginForm(props) {
   const [firstname, setFirstName] = useState('');
@@ -10,8 +9,6 @@ function LoginForm(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const navigate = useNavigate();
-  const [username,setUsername]=useState();
   const [successForm, setSuccessForm] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
   const customStyles = {

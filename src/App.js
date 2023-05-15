@@ -12,7 +12,7 @@ import {faPhone} from '@fortawesome/free-solid-svg-icons'
 import Admin from './pages/Utils/Admin';
 import LoginForm from './pages/LoginForm/LoginForm';
 import MakeAppointment from './pages/MakeAppointment/MakeAppointment';
-import { redirect } from 'react-router-dom';
+import SpecializationPage from './pages/Specialization/SpecializationPage';
 library.add(faFacebookF,faInstagram, faPhone);
 function App() {
   
@@ -29,6 +29,7 @@ function App() {
         {<Route path='/admin' element= {<Admin/>}/>}
         {<Route path='/login' element= {<LoginForm/>}/>}
         {<Route path='/makeappointment' element= {<MakeAppointment/>}/>}
+        {<Route path='/specialization/:id' element= {<SpecializationPage/>}/>}
 
       </Routes>
     </div>
