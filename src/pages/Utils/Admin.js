@@ -8,8 +8,8 @@ function AddDoctor() {
   const [rating, setRating] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [imageFile, setImageFile] = useState(null);
-
+  const [selectedFile, setSelectedFile] = useState(null);
+const role = "doctor";
 
 
   const [isOpen, setIsOpen] = useState(false);
@@ -20,44 +20,25 @@ function AddDoctor() {
   // const [searchTerm, setSearchTerm] = useState('');
   // const [searchResults, setSearchResults] = useState([]);
 
-  // function handleSearch(event) {
-  //   event.preventDefault();
-  //   fetch(`http://localhost:5000/api/search?q=${searchTerm}`)
-  //     .then(response => response.json())
-  //     .then(data => setSearchResults(data.results))
-  //     .catch(error => console.error(error));
-  // }
-  // function handleTermChange(event) {
-  //   setSearchTerm(event.target.value);
-  // }
-
-  // const filteredResults = searchTerm.length > 0
-  // ? searchResults.filter(result => (
-  //   result.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //   result.last_name.toLowerCase().includes(searchTerm.toLowerCase())
-  // ))
-  // : searchResults;
-
-  // const handleFileChange = (event) => {
-  //   const file = event.target.files[0];
-  //   setImageFile(file);
-  // };
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // const formData = new FormData();
-    // const imgname = firstname+lastname;
-    // formData.append('image',imageFile);
-    // formData.append('imageName',imgname);
-    // await fetch('http://localhost:5000/image/upload', {
-    //   method: 'POST',
-    //   body: formData
-    // })
-    // .then(response=>{
-    //   console.log(response.json());
-    // })
-    // .catch(error=>{
-    //   console.log(error.json());
-    // })
+    const formData = new FormData();
+    const imgname = `${firstname}${lastname}`;
+    formData.append('image',selectedFile);
+    formData.append('imageName',imgname);
+    await fetch('http://localhost:5000/image/upload', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response=>{
+      console.log(response.json());
+    })
+    .catch(error=>{
+      console.log(error.json());
+    })
     fetch('http://localhost:5000/doctor/register', {
       method: 'POST',
       headers: {
@@ -70,6 +51,7 @@ function AddDoctor() {
         password,
         specialization,
         rating,
+        role,
       }),
     })
       .then((response) => response.json())
@@ -123,7 +105,7 @@ function AddDoctor() {
                 <div className="cut"></div>
                 <label htmlFor="rating" className="placeholder">Rating</label>
               </div>
-              {/* <div className="input-container ic2">
+              <div className="input-container ic2">
           <input className="image-input"
             type="file"
             id="image-upload"
@@ -131,7 +113,7 @@ function AddDoctor() {
           />
           <div className="cut"></div>
           <label htmlFor="image" className="placeholder">Select an image:</label>
-        </div> */}
+        </div>
               <button type="text" className="submit" onClick={handleSubmit}>Submit</button>
             </div>
             )

@@ -28,12 +28,12 @@ app.use(express.json());
 const sequelize = require('./database/db');
 const userRouter = require('./Routes/User')
 const doctorRouter = require('./Routes/Doctor');
-const imageRouter = require('./Routes/ImageUpload');
 const appointmentsRouter = require('./Routes/Appointments');
 const searchRouter = require('./utils/search')
 const specializationsRouter = require('./Routes/Specializations')
 const diseasesRouter = require('./Routes/Diseases')
 const symptomsRouter = require('./Routes/Diseases')
+const imageRouter = require('./Routes/Image')
 
 app.use("/user",userRouter);
 app.use("/doctor",doctorRouter);
@@ -43,7 +43,7 @@ app.use("/api",searchRouter);
 app.use("/specializations",specializationsRouter);
 app.use("/diseases",diseasesRouter);
 app.use("/symptoms",symptomsRouter);
-app.use(express.static('uploads'));
+app.use('/uploads', express.static('uploads'));
 
 sequelize.sync().then(()=>{
   app.listen(5000,() =>{
