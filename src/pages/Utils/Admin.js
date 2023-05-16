@@ -4,7 +4,7 @@ import './Admin.css'
 function AddDoctor() {
   const [firstname, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
-  const [specialization, setSpecialization] = useState('');
+  const [specializationId, setSpecializationId] = useState('');
   const [rating, setRating] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -49,7 +49,7 @@ const role = "doctor";
         lastname,
         email,
         password,
-        specialization,
+        specializationId,
         rating,
         role,
       }),
@@ -96,7 +96,7 @@ const role = "doctor";
                 <label htmlFor="password" className="placeholder">Password</label>
               </div>
               <div className="input-container ic2">
-                <input id="specialization" className="input" type="text" placeholder=" " value={specialization} onChange={(event) => setSpecialization(event.target.value)} />
+                <input id="specialization" className="input" type="number" placeholder=" " value={specializationId} onChange={(event) => setSpecializationId(event.target.value)} />
                 <div className="cut"></div>
                 <label htmlFor="specialization" className="placeholder">Specialization</label>
               </div>

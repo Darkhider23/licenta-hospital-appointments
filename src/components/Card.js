@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from 'prop-types'
 import './Card.css'
 import { Link } from 'react-router-dom'
+import { useState } from "react";
 
 function Card(props) {
+    const [specialization,setSpecialization] = useState();
+    useEffect(()=>{
+        fetch(`http://localhost:5000/specializations/${props.content}`)
+        .then((response)=>response.json())
+        .then((data)=>{setSpecialization(data); console.log(data)})
+    },[props.content])
     return (
         <div className="card">
             <img src={props.image} alt="" />
@@ -13,7 +20,7 @@ function Card(props) {
                     <h5 className="card-title">{props.lastname}</h5>
                 </div>
                 <div className="specialization">
-                    <h5>{props.content}</h5>
+                    <h5>{specialization && specialization.name}</h5>
                 </div>
                 <div className="rating">
                     {props.id && (
@@ -40,7 +47,6 @@ Card.propTypes = {
     id: PropTypes.number.isRequired,
     firstname: PropTypes.string.isRequired,
     lastname: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
 };
 

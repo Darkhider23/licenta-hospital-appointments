@@ -1,0 +1,71 @@
+.disease-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.disease-container .title {}
+
+.disease-container .title h1 {
+    margin-top: -3.2vh;
+    padding: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #0080FF80;
+}
+
+.disease-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.disease-container .disease-content .disease-list li {
+    list-style: none;
+    border: none;
+    background-color: rgba(245, 245, 245, 0.616);
+    padding: 10px;
+    border-radius: 10px;
+    width: 30vh;
+    text-align: center;
+    margin-top: 2vh;
+}
+
+.disease-container .disease-content .disease-list .list-elem:hover,
+.disease-container .disease-content .disease-list .active {
+background-color: #0080FF80;
+box-shadow: 2px 5px 16px 0px #0B325E, 5px 5px 15px 5px rgba(0, 0, 0,0);
+transition: 0.5s ease-in-out;
+}
+
+.disease-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:5vh;
+    margin-top:8vh;
+}
+.disease-details .description-container,.disease-details .symptoms-container{
+    height: 350px;
+    width: 350px;
+    border-radius: 10px;
+    background-color: rgba(248, 244, 238, 0.603);
+}
+.box-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 8vh;
+}
+.description-container p,.symptoms-container ul{
+    border-top:1px solid black;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 10px;
+}
+.symptoms-container ul{
+    padding-left: 30px;
+    list-style:disc;
+}

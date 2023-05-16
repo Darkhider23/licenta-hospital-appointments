@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { Symptoms, Diseases } = require('../models');
+const Symptoms = require('../Models/Symptoms');
+const Diseases = require('../Models/Diseases');
 
 // Get all symptoms
 router.get('/', async (req, res) => {
   try {
-    const symptoms = await Symptoms.findAll({ include: Diseases });
+    const symptoms = await Symptoms.findAll();
     res.json(symptoms);
   } catch (err) {
     console.error(err.message);
@@ -13,11 +14,30 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/diseases/:diseasesId',async(req,res)=>{
+  const diseaseId = req.params.diseasesId;
+
+  try{
+    const symptoms = await Symptoms.findAll({
+      where:{
+        diseaseId:diseaseId,
+      },
+    });
+    res.json(symptoms);
+  }catch(error){
+    console.log(error);
+    res.status(500).json({message:'Server Error', error:error.message});
+  }
+})
+
 // Create a symptom
 router.post('/', async (req, res) => {
   const { name, diseaseId } = req.body;
+  console.log(name);
+  console.log(diseaseId);
   try {
     const disease = await Diseases.findByPk(diseaseId);
+    console.log(disease);
     if (!disease) {
       return res.status(400).json({ msg: 'Invalid disease ID' });
     }

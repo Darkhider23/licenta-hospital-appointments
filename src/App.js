@@ -13,6 +13,11 @@ import Admin from './pages/Utils/Admin';
 import LoginForm from './pages/LoginForm/LoginForm';
 import MakeAppointment from './pages/MakeAppointment/MakeAppointment';
 import SpecializationPage from './pages/Specialization/SpecializationPage';
+import Diseases from './pages/Diseases/Diseases';
+import DoctorsSP from './pages/DoctorSP/DoctorSP';
+import Tools from './pages/Tools/Tools';
+import Calculator from './pages/Calculator/Calculator';
+import BMIPage from './pages/BMIPage/BMIPage';
 library.add(faFacebookF,faInstagram, faPhone);
 function App() {
   
@@ -24,12 +29,16 @@ function App() {
       {<Route path='/' element= {<Home/>}/>}
         {<Route path='/home' element= {<Home/>}/>}
         {<Route path='/contact' element= {<Contact/>}/>}
-        {<Route path='/doctors' element= {<Doctors/>}/>}
+        {<Route path='/doctors/' element= {<Doctors/>}/>}
+        {<Route path='/doctors/:id' element= {<DoctorsSP/>}/>}
         {<Route path='/specializations' element= {<Specializations/>}/>}
         {<Route path='/admin' element= {<Admin/>}/>}
         {<Route path='/login' element= {<LoginForm/>}/>}
         {<Route path='/makeappointment' element= {<MakeAppointment/>}/>}
         {<Route path='/specialization/:id' element= {<SpecializationPage/>}/>}
+        {<Route path='/diseases/:id' element= {<Diseases/>}/>}
+        {<Route path='/calculator' element= {<Calculator/>}/>}
+        {<Route path='/bmi' element= {<BMIPage/>}/>}
 
       </Routes>
     </div>

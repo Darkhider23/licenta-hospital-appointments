@@ -30,7 +30,6 @@ router.post('/upload', upload.single('image'), async (req, res) => {
         console.error(error);
         res.status(500).json({ message: 'Error saving image' });
       } else {
-        // Save the image details to the database
         const image = await Image.create({
           filename: imageName,
           url: filePath,

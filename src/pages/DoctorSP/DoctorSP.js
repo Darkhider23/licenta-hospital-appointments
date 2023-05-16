@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react"
 import Card from "../../components/Card";
 
 import axios from 'axios';
-import './Doctors.css'
-function Doctors() {
+import './DoctorSP.css'
+import { useParams } from "react-router-dom";
+function DoctorsSP() {
   const [data, setData] = useState();
-
-  useEffect(() => {
-    axios.get('http://localhost:5000/doctor')
+  const id = useParams().id;
+  useEffect(()=>{
+      axios.get(`http://localhost:5000/doctor/specializations/${id}`)
       .then(response => {
         console.log(response.data);
         setData(response.data);
@@ -27,7 +28,7 @@ function Doctors() {
               return null;
             });
         });
-
+  
         Promise.all(imagePromises)
           .then(imageUrls => {
             // Update the data array with the fetched image URLs
@@ -41,32 +42,32 @@ function Doctors() {
             console.log('Error fetching image URLs:', error);
           });
       };
-
+  
       fetchImageUrls();
     }
   }, [data]);
-  return (
-    <div className="doctor-page">
-      <div className="card-container">
-        {data ? (
-          <ul className="card-list">
-            {data.map(item => (
-              <li className="card-element" key={item.id}>
-                <Card
-                  id={item.id}
-                  firstname={item.firstname}
-                  lastname={item.lastname}
-                  content={item.specializationId}
-                  rating={item.rating}
-                  image={`http://localhost:5000/${item.imageUrl}`}
-                /></li>
-            ))}
-          </ul>
-        ) : (
-          <p>uploading...</p>
-        )}
+    return (
+      <div className="doctor-page">
+        <div className="card-container">
+          {data ? (
+            <ul className="card-list">
+              {data.map(item => (
+                <li className="card-element" key={item.id}>
+                  <Card
+                    id={item.id}
+                    firstname={item.firstname}
+                    lastname={item.lastname}
+                    content={item.specializationId}
+                    rating={item.rating}
+                    image={`http://localhost:5000/${item.imageUrl}`}
+                  /></li>
+              ))}
+            </ul>
+          ) : (
+            <p>uploading...</p>
+          )}
+        </div>
       </div>
-    </div>
-  )
-}
-export default Doctors;
+    )
+  }
+export default DoctorsSP;

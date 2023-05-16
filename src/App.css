@@ -1,6 +1,8 @@
 #root {
-  background-image: url('./assets/background.jpg');
+  /* background-image: url('./assets/background.jpg'); */
+  background-image: url('./assets/bg.jpg');
   background-size: cover;
+  --lightblue:#0080FF80;
 }
 
 .page-container {

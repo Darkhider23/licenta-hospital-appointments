@@ -20,36 +20,51 @@ function SpecializationPage() {
       .then((data) => { console.log(data); setDiseases(data) });
   }, [id]);
 
+  const handleDiseaseClick = () =>{
+    window.location.href=`/diseases/${id}`;
+  }
+  const handleDoctorClick = () =>{
+    window.location.href=`/doctors/${id}`
+  }
   return (
     <div className="specialization-page-container">
       <div className="title">
         <h1>{specialization && specialization.name}</h1>
       </div>
-      <div className="s-card about">
-        <div className="card-title">
-          <h2>About</h2>
+      <div className="cards-container">
+        <div className="s-card about">
+          <div className="card-title">
+            <h2>About</h2>
+          </div>
+          <div className="card-content">
+            <p>{specialization && specialization.description}</p>
+          </div>
         </div>
-        <div className="card-content">
-          <p>{specialization && specialization.description}</p>
-        </div>
-      </div>
-      <div className="s-card diseases">
-      <div className="card-title">
-          <h2>Diseases</h2>
-        </div>
-        <div className="card-content">
-          <p>We are offering all the information necessary to spread awareness</p>
+        <div className="s-card diseases">
+          <div className="card-title">
+            <h2>Diseases</h2>
+          </div>
+          <div className="card-content">
+            <p>We are offering all the information necessary to spread awareness</p>
+          </div>
+          <div className="button-container">
+          <button onClick={handleDiseaseClick}>See more</button>
         </div>
       </div>
       <div className="s-card doctors">
-      <div className="card-title">
+        <div className="card-title">
           <h2>Doctors</h2>
         </div>
         <div className="card-content">
           <p>Our medical force is the best and we are picking only the top</p>
         </div>
+        <div className="button-container">
+          <button onClick={handleDoctorClick}>See more</button>
+        </div>
+
       </div>
-      </div>
+    </div>
+    </div >
   );
 }
 

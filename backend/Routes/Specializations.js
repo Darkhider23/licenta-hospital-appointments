@@ -12,7 +12,7 @@ router.get('/search', async (req, res) => {
         [Op.like]: `%${query}%`,
       },
     },
-    limit: 10,
+    limit: 5,
   });
   res.json({ results });
 });
