@@ -6,6 +6,7 @@ function NavbarPage(props) {
   const [firstname, setFirstname] = useState(localStorage.getItem('firstname'));
   const [lastname, setLastname] = useState(localStorage.getItem('lastname'));
   const [userId, setUserId] = useState(localStorage.getItem('userId'));
+  const [scroll, setScroll] = useState(false);
   useEffect(() => {
     fetch(`http://localhost:5000/user/${userId}`, {
       method: 'GET',
@@ -25,19 +26,24 @@ function NavbarPage(props) {
     setUserId('');
   };
 
-  // document.addEventListener('DOMContentLoaded', () => {
-  //   const dropdown = document.querySelector('.dropdown');
-  
-  //   if (dropdown) {
-  //     dropdown.addEventListener('mouseleave', () => {
-  //       dropdown.querySelector('.dropdown-menu').style.display = 'none';
-  //     });
-  //   }
-  // });
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setScroll(true);
+      } else {
+        setScroll(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
 
   return (
-    <nav className='navbar-home'>
+    <nav className={scroll ?'navbar-home scrolled': 'navbar-home'}>
       <div className='navbar-container'>
         <NavLink to="/home" className="navbar-logo" id={"flex"} >
           <img src={logo} alt=""></img>

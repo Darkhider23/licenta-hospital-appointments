@@ -9,7 +9,7 @@
 
 
 .navbar-home {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(30, 80, 67, 0.322);
     height: 80%;
     display: flex;
     justify-content: center;
@@ -18,6 +18,17 @@
     position: sticky;
     top: 0;
     z-index: 999;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: all 0.6s;
+}
+
+.scrolled {
+    background-color: rgba(30, 80, 67, 0.322);
+
+    backdrop-filter: blur(18px);
+    transition: all 0.6s;
+    box-shadow: 5px 5px 15px 5px rgba(30, 80, 67, 0.322);
 }
 
 .navbar-container {
@@ -29,8 +40,9 @@
 }
 
 .navbar-logo {
-    background: rgb(8, 66, 107);
-    background: linear-gradient(90deg, rgba(18, 156, 255, 1) 0%, rgb(49, 126, 168) 50%, rgb(73, 134, 224) 100%);
+    /* background: rgb(8, 66, 107);
+    background: linear-gradient(90deg, rgba(18, 156, 255, 1) 0%, rgb(49, 126, 168) 50%, rgb(73, 134, 224) 100%); */
+    background-color: var(--lightblue);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     justify-self: start;
@@ -80,15 +92,18 @@
     padding: 10px;
     border-radius: 10px;
     border: none;
-    background-color: #0080FF80;
+    background-color: var(--lightblue);
     font-size: 15px;
-    font-style: bold;
-    box-shadow: 2px 5px 16px 0px #0B325E, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+    box-shadow: 0px 5px 15px 0px #1a6283, inset 0px 25px 33px -17px #1a6283;
     cursor: pointer;
+}
+.logout-btn:hover{
+    transform: scale(1.1);
+    transition: transform 0.5s ease-in-out;
 }
 
 .nav-links {
-    color: black;
+    color: white;
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -117,40 +132,95 @@
     font-family: 'Cairo', sans-serif;
     font-weight: 600;
     font-size: 18px;
-    background-color: #0080FF80;
+    background-color: var(--lightblue);
     border-bottom-left-radius: 30%;
     border-bottom-right-radius: 30%;
     transition: all 1s;
 }
-.dropdown-menu{
+
+.dropdown-menu {
     list-style: none;
 }
-.dropdown-menu{
+
+.dropdown-menu {
     display: none;
-    width: 72px;
-    border:none;
+    width: 100px;
+    border: none;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     padding: 10px;
-    background-color:rgba(255, 255, 255, 0.438);
+    background-color: var(--lightblue);
+    box-shadow: var(--shadowColor);
 }
-.dropdown-menu :last-child{
-    margin-top:15px;
+
+.dropdown-menu :last-child {
+    margin-top: 15px;
 }
-.dropdown-menu li{
+
+.dropdown-menu li {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: 15px;
 }
-.dropdown-menu li a{
-    color:black;
+
+.dropdown-menu li a {
+    color: black;
     text-decoration: none;
 }
-.dropdown-menu li a:hover{
+
+.dropdown-menu li a:hover {
     text-decoration: underline;
 }
-.nav-item.dropdown:hover .dropdown-menu{
+
+.nav-item.dropdown:hover .dropdown-menu {
     display: block;
 }
+.dropdown-menu{
+    position:absolute;
+    -webkit-animation: slide-in-blurred-top 700ms cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+    animation: slide-in-blurred-top 700ms cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+}
+@-webkit-keyframes slide-in-blurred-top {
+    0% {
+      -webkit-transform: translateY(-100%) scaleY(2.5) scaleX(0.2);
+              transform: translateY(-100%) scaleY(2.5) scaleX(0.2);
+      -webkit-transform-origin: 50% 0%;
+              transform-origin: 50% 0%;
+      -webkit-filter: blur(40px);
+              filter: blur(40px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+              transform: translateY(0) scaleY(1) scaleX(1);
+      -webkit-transform-origin: 50% 50%;
+              transform-origin: 50% 50%;
+      -webkit-filter: blur(0);
+              filter: blur(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slide-in-blurred-top {
+    0% {
+      -webkit-transform: translateY(-100%) scaleY(2.5) scaleX(0.2);
+              transform: translateY(-100%) scaleY(2.5) scaleX(0.2);
+      -webkit-transform-origin: 50% 0%;
+              transform-origin: 50% 0%;
+      -webkit-filter: blur(40px);
+              filter: blur(40px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+              transform: translateY(0) scaleY(1) scaleX(1);
+      -webkit-transform-origin: 50% 50%;
+              transform-origin: 50% 50%;
+      -webkit-filter: blur(0);
+              filter: blur(0);
+      opacity: 1;
+    }
+  }
+  

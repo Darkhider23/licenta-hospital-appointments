@@ -2,7 +2,10 @@
   /* background-image: url('./assets/background.jpg'); */
   background-image: url('./assets/bg.jpg');
   background-size: cover;
-  --lightblue:#0080FF80;
+  --lightblue:#1fc2e6;
+  --lightblue-hover:#126577;
+  --shadowColor:0px 5px 15px 2px #1a6283,inset 0px 5px 33px -17px #1a6283;
+  --shadowCard :0px 10px 35px 0px rgba(214, 209, 209, 0.342),inset 0px 25px 29px -18px rgba(128, 128, 128, 0.575);
 }
 
 .page-container {

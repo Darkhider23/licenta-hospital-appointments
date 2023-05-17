@@ -2,14 +2,15 @@
     position: absolute;
     left: 5rem;
     top: 10rem;
-    padding: 0.5em;
     width: 40rem;
     text-transform: uppercase;
-    background-color: rgba(204, 226, 243, 0.5);
+    background-color: rgba(193, 219, 238, 0.637);
     border-radius:30px;
+    padding: 30px;
+    box-shadow: 2px 5px 16px 0px #95b3d6, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
   .motto h1 {
-    font-size: 4em;
+    font-size: 3.5em;
     line-height: 1em;
   }
   .motto h2 {
@@ -18,10 +19,9 @@
     padding-left: 1.5em;
   }
   .motto h1,.motto h2{
-    background: rgb(8, 66, 107);
-background: linear-gradient(90deg, rgba(18,156,255,1) 0%, rgba(65,159,210,1) 50%, rgb(135, 170, 211) 100%);
-    filter:contrast(120%);
-    border-radius: 30px;
+    background: rgb(0, 99, 170);
+background: linear-gradient(90deg, rgb(14, 88, 141) 0%, rgb(33, 100, 136)0%, rgb(100, 154, 216) 100%);
+filter: contrast(200%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -51,5 +51,6 @@ background: linear-gradient(90deg, rgba(18,156,255,1) 0%, rgba(65,159,210,1) 50%
     background-color: rgba(204, 226, 243, 0.5);
     border-radius: 30px;
     height: 300px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    box-shadow:var(--shadowCard);
+    /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
   }

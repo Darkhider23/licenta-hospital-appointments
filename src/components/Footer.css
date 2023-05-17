@@ -49,5 +49,6 @@
     align-items:center;
 }
 .right-side, .site-mark{
-    color: rgba(27,34,36,70);
+    /* color: rgba(27,34,36,70); */
+    color:white;
 }

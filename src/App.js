@@ -15,7 +15,6 @@ import MakeAppointment from './pages/MakeAppointment/MakeAppointment';
 import SpecializationPage from './pages/Specialization/SpecializationPage';
 import Diseases from './pages/Diseases/Diseases';
 import DoctorsSP from './pages/DoctorSP/DoctorSP';
-import Tools from './pages/Tools/Tools';
 import Calculator from './pages/Calculator/Calculator';
 import BMIPage from './pages/BMIPage/BMIPage';
 library.add(faFacebookF,faInstagram, faPhone);
