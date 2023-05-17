@@ -1,15 +1,145 @@
 .bmi-page {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
-.bmi-page form {
+.bmi-page .form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    margin-top:10vh;
+    background-color: rgba(248, 248, 248, 0.616);
+    padding: 20px;
+    border-radius: 30px;
+    height: 400px;
 }
+.bmi-content{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+.bmi-content .left-card{
+    background-color: rgba(248, 248, 248, 0.616);;
+    width: 400px;
+    padding: 30px;
+    border-radius:30px;
+}
+.bmi-content .left-card .title{
+    color:black;
+    font-size:23px;
+}
+.bmi-content .left-card .syndrome-list{
+    display: flex;
+     flex-wrap: wrap;
+}
+.bmi-content .left-card .syndrome-list .syndrome-box{
+    margin-top:3vh;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.bmi-content .left-card .syndrome-list .syndrome-box h3{
+    color:black;
+}
+.bmi-content .left-card .syndrome-list .syndrome-box .circle{
+    border-radius:100px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border:2px solid var(--lightblue);
+    font-size:20px;
+    margin-bottom: 2vh;
+    color:black;
+}
+.bmi-content .right-card{
+    background-color: rgba(248, 248, 248, 0.616);;
+    width: 400px;
+    padding: 30px;
+    border-radius:30px;
+}
+.bmi-content .right-card p{
+    font-size:20px;
+}
+.bmi-page .input-container{
+    display: flex;
+}
+
+.weigth-container{
+    margin-left:3vh;
+}
+.input-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-container .button-box{
+display: flex;
+align-items: center;
+justify-content: center;
+margin-top:5vh;
+}
+.form-container .button-box button{
+    font-size:3vh;
+    padding: 10px;
+    border-radius: 10px;
+    border:none;
+    background-color: #22b9ff;
+    color:white;
+    
+}
+.form-container .button-box button:hover{
+    transform: scale(1.1);
+    transition: transform 0.4s ease-in-out;
+}
+.weigth-container, .heigth-container {
+    display: flex;
+    align-items: center;
+    background-color: gray;
+    height: 140px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.weigth-container input, .heigth-container input {
+    background: transparent;
+    cursor: pointer;
+    border: none;
+    color: white;
+    height: 100%;
+    font-size: 40px;
+    width: 100px;
+    direction: rtl;
+    margin-right:10px;
+}
+.weigth-container i,.heigth-container i,.weigth-container span,.heigth-container span{
+    color:white;
+    font-size: 30px;
+}
+
+.weigth-container input:focus-visible, .heigth-container input:focus-visible {
+    outline: none;
+}
+
+.no-spin::-webkit-inner-spin-button,
+.no-spin::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.bmi-page .bmi-title{
+    padding: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: #22b9ff;
+    color:white;
+    box-shadow: var(--shadowColor);
+}
+
 
 .status-bar {
     display: flex;
@@ -22,13 +152,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color:white;
+    font-size:20px;
 }
 
 .status-bar-color {
     height: 40px;
     width: 20%;
 }
-
+  
 .first {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -37,32 +169,4 @@
 .last {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-}
-
-.weigth-container, .heigth-container {
-    display: flex;
-    align-items: center;
-    background-color: gray;
-    height: 60px;
-}
-
-.weigth-container input, .heigth-container input {
-    background: transparent;
-    cursor: pointer;
-    border: none;
-    color: white;
-    height: 100%;
-    font-size: 40px;
-    width: 150px;
-    direction: rtl;
-}
-
-.weigth-container input:focus-visible, .heigth-container input:focus-visible {
-    outline: none;
-}
-
-.no-spin::-webkit-inner-spin-button,
-.no-spin::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
 }
