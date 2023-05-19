@@ -7,11 +7,12 @@ const Appointment = require('../Models/Appointments');
 router.post('/', async (req, res) => {
   try {
     const appointment = await Appointment.create(req.body);
-    res.status(201).json(appointment);
+    res.status(201).json({ message: 'Success', appointment });
   } catch (error) {
     console.error(error);
     const messageError = error.errors[0].message;
-    res.status(500).json({ message: 'Server Error',messageError});
+    const objerror = error.schedules;
+    res.status(500).json({ message: 'Server Error', messageError, objerror });
   }
 });
 
@@ -27,7 +28,7 @@ router.get('/', async (req, res) => {
 });
 
 //Get the appointments of doctor
-router.get('/doctor-appointments/:doctorId',async(req,res)=>{
+router.get('/doctor-appointments/:doctorId', async (req, res) => {
   try {
     const { doctorId } = req.params;
     const appointments = await Appointment.findAll({
@@ -41,6 +42,22 @@ router.get('/doctor-appointments/:doctorId',async(req,res)=>{
     res.status(500).json({ message: 'Server Error' });
   }
 })
+
+router.get('/user/:userId', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const appointments = await Appointment.findAll({
+      where: {
+        userId: userId
+      }
+    });
+    res.json(appointments);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+});
+
 // Get appointment by ID
 router.get('/:id', async (req, res) => {
   try {

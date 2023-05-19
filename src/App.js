@@ -17,6 +17,7 @@ import Diseases from './pages/Diseases/Diseases';
 import DoctorsSP from './pages/DoctorSP/DoctorSP';
 import Calculator from './pages/Calculator/Calculator';
 import BMIPage from './pages/BMIPage/BMIPage';
+import UserProfile from './pages/UserProfile/UserProfile';
 library.add(faFacebookF,faInstagram, faPhone);
 function App() {
   
@@ -38,6 +39,8 @@ function App() {
         {<Route path='/diseases/:id' element= {<Diseases/>}/>}
         {<Route path='/calculator' element= {<Calculator/>}/>}
         {<Route path='/bmi' element= {<BMIPage/>}/>}
+        {<Route path='/userprofile' element= {<UserProfile/>}/>}
+
 
       </Routes>
     </div>

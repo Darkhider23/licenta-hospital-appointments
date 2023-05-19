@@ -21,35 +21,21 @@ const Appointment = sequelize.define('Appointment', {
     allowNull: true,
     validate: {
       async notOverlapping() {
-        const schedules = await Appointment.findAll({
+        const overlappingAppointments = await Appointment.findAll({
           where: {
-            [Op.and]: [
-              { appointmentTime: this.appointmentTime },
-              { doctorId: this.doctorId },
+            doctorId: this.doctorId,
+            appointmentTime: this.appointmentTime,
+            [Op.or]: [
               {
-                [Op.or]: [
+                [Op.and]: [
                   {
                     startHour: {
-                      [Op.lte]: this.startHour,
-                    },
-                    endHour: {
-                      [Op.gte]: this.startHour,
+                      [Op.lt]: this.endHour,
                     },
                   },
                   {
-                    startHour: {
-                      [Op.gte]: this.startHour,
-                    },
                     endHour: {
-                      [Op.lte]: this.endHour,
-                    },
-                  },
-                  {
-                    startHour: {
-                      [Op.lte]: this.endHour,
-                    },
-                    endHour: {
-                      [Op.gte]: this.endHour,
+                      [Op.gt]: this.startHour,
                     },
                   },
                 ],
@@ -57,11 +43,18 @@ const Appointment = sequelize.define('Appointment', {
             ],
           },
         });
-
-        if (schedules.length > 0) {
-          throw new Error('This appointment is overlapping with an existing appointment.');
+      
+        if (overlappingAppointments.length > 0) {
+          const overlappingHours = overlappingAppointments.map(appointment => {
+            const overlappingStartHour = appointment.startHour > this.startHour ? appointment.startHour : this.startHour;
+            const overlappingEndHour = appointment.endHour < this.endHour ? appointment.endHour : this.endHour;
+            return `${overlappingStartHour} - ${overlappingEndHour}`;
+          });
+      
+          throw new Error(`This appointment is overlapping with the following hour(s): ${overlappingHours.join(', ')}`);
         }
-      },
+      }
+      
     },
   },
   endHour: {

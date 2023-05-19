@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./MakeAppointment.css";
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
 
 function MakeAppointment() {
     const doctorId = sessionStorage.getItem("id");
@@ -8,6 +10,21 @@ function MakeAppointment() {
     const [appointmentTimes, setAppointmentTimes] = useState([]);
     const [doctor, setDoctor] = useState();
     const [selectedTime, setSelectedTime] = useState("");
+    const [reasonForVisit, setReasonForVisit] = useState('');
+    const [modalMessage, setModalMessage] = useState('');
+    const [successForm, setSuccessForm] = useState(false);
+
+    const customStyles = {
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+
+        },
+    };
 
     useEffect(() => {
         fetch(`http://localhost:5000/appointments/doctor-appointments/${doctorId}`)
@@ -79,11 +96,12 @@ function MakeAppointment() {
             doctorId: doctorId,
             userId: userId,
             appointmentTime: selectedDate,
-            startHour: selectedTime,
-            endHour: `${parseInt(selectedTime.slice(0, 2)) + 1}:00`,
-            status:"pending",
-            reasonForVisit:"Check Up",
+            startHour: `${selectedTime}:00`,
+            endHour: `${parseInt(selectedTime.slice(0, 2)) + 1}:00:00`,
+            status: "pending",
+            reasonForVisit: reasonForVisit,
         };
+        console.log(data);
         fetch("http://localhost:5000/appointments", {
             method: "POST",
             headers: {
@@ -93,20 +111,36 @@ function MakeAppointment() {
         })
             .then((response) => response.json())
             .then((data) => {
+                if (data.message === 'Success') {
+                    setModalMessage('We have received your appointment, We will notify you as soon as possible after a doctor reviewed it');
+                    setSuccessForm(true)
+                }
                 console.log(data);
-                alert(data);
             })
 
-            .catch((error) => { console.log(error); alert(error) });
+            .catch((error) => {
+                console.log(error);
+                setModalMessage(error);
+                setSuccessForm(true);
+            });
+        setSelectedTime('');
     };
+
+    const today = new Date().toISOString().split('T')[0];
+    const dateInput = document.getElementById('dateInput');
+
+    if (dateInput) {
+        dateInput.setAttribute('min', today);
+    }
+
 
     return (
         <div className="appointment-container">
             <div className="form-container">
-            <div className="doctor-details">
-                <h2>Appointment with</h2>
-                {doctor && <h2>Dr. {doctor.firstname} <span>{doctor.lastname}</span></h2>}
-            </div>
+                <div className="doctor-details">
+                    <h2>Appointment with</h2>
+                    {doctor && <h2>Dr. {doctor.firstname} <span>{doctor.lastname}</span></h2>}
+                </div>
                 <label htmlFor="date">Choose a date:</label>
                 <input type="date" id="dateInput" onChange={handleDateChange} />
                 <label htmlFor="time">
@@ -125,10 +159,18 @@ function MakeAppointment() {
                     </select>
                 </label>
                 <label htmlFor="reason">Reason to visit:</label>
-                <input type="text" id="reason"></input>
-                <input type="submit" placeholder="Submit" onClick={handleSubmit}></input>
-
+                <input type="text" id="reason" onChange={(event) => { setReasonForVisit(event.target.value) }} />
+                <input type="submit" placeholder="Submit" onClick={handleSubmit} />
             </div>
+            <Modal isOpen={successForm} style={customStyles}>
+                <div className="modal-content">
+                    <h2>Success!</h2>
+                    <p>{modalMessage}</p>
+                    <button onClick={() => {
+                        setSuccessForm(false);
+                        }}>Close</button>
+                </div>
+            </Modal>
         </div>
     );
 }

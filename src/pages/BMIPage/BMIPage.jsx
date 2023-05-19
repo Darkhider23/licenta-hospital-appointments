@@ -135,7 +135,7 @@ function BMICalculator() {
           <p>Obesity and overweight pose a significant health concern in the modern world, contributing to a rise in overall illness, reduced life expectancy, and diminished quality of life.
 
             The presence of excess weight and obesity carries various risks, impacting multiple systems within the body. Having a body mass index (BMI) above 30 significantly increases the likelihood of complications and related diseases, with diabetes and cardiovascular conditions being the most severe among them.</p>
-        </div>
+        </div> 
       </div>
 
     </div>

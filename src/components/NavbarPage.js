@@ -7,6 +7,7 @@ function NavbarPage(props) {
   const [lastname, setLastname] = useState(localStorage.getItem('lastname'));
   const [userId, setUserId] = useState(localStorage.getItem('userId'));
   const [scroll, setScroll] = useState(false);
+  const [role,setRole] = useState(localStorage.getItem('role'));
   useEffect(() => {
     fetch(`http://localhost:5000/user/${userId}`, {
       method: 'GET',
@@ -91,7 +92,7 @@ function NavbarPage(props) {
           {
             userId ? <>
               <li className='nav-item'>
-                <NavLink to={'/user-page'} className={(navData) => (navData.isActive ? "active-link username" : "nav-links username")}>
+                <NavLink to={role==='doctor'? '/doctorpage' : '/userprofile'} className={(navData) => (navData.isActive ? "active-link username" : "nav-links username")}>
                   {firstname}<br />{lastname}
                 </NavLink>
               </li>
