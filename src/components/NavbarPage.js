@@ -9,6 +9,7 @@ function NavbarPage(props) {
   const [scroll, setScroll] = useState(false);
   const [role,setRole] = useState(localStorage.getItem('role'));
   useEffect(() => {
+    if(role==='patient'){
     fetch(`http://localhost:5000/user/${userId}`, {
       method: 'GET',
       headers: {
@@ -20,6 +21,20 @@ function NavbarPage(props) {
         setFirstname(data.firstname);
         setLastname(data.lastname);
       })
+    }
+    else if(role==='doctor'){
+      fetch(`http://localhost:5000/doctor/${userId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setFirstname(data.firstname);
+        setLastname(data.lastname);
+      })
+    }
   }, [userId]);
   const click = useState();
   const handleLogout = () => {
@@ -92,7 +107,7 @@ function NavbarPage(props) {
           {
             userId ? <>
               <li className='nav-item'>
-                <NavLink to={role==='doctor'? '/doctorpage' : '/userprofile'} className={(navData) => (navData.isActive ? "active-link username" : "nav-links username")}>
+                <NavLink to={role==='doctor'? '/doctorprofile' : '/userprofile'} className={(navData) => (navData.isActive ? "active-link username" : "nav-links username")}>
                   {firstname}<br />{lastname}
                 </NavLink>
               </li>

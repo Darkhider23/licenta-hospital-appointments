@@ -8,6 +8,7 @@ function LoginForm(props) {
   const [lastname, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role,setRole] = useState('');
 
   const [successForm, setSuccessForm] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
@@ -25,7 +26,35 @@ function LoginForm(props) {
   const handleLogin = (event) => {
     event.preventDefault();
     console.log(email, password);
-    fetch('http://localhost:5000/user/login', {
+    if(role ==='doctor'){
+      fetch('http://localhost:5000/doctor/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.message === "Login successful") {
+            console.log(data);
+            console.log(data.role);
+            localStorage.setItem('userId', data.id);
+            localStorage.setItem('role', data.role);
+          }
+          setModalMessage(data.message);
+          setSuccessForm(true);
+        })
+        .catch((error) => {
+          setModalMessage(error);
+          setSuccessForm(true);
+        });
+    }
+    else if(role==='pacient'){
+      fetch('http://localhost:5000/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -38,8 +67,8 @@ function LoginForm(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.message === "Login successful") {
-          localStorage.setItem('userId',data.id);
-          localStorage.setItem('role',data.role);
+          localStorage.setItem('userId', data.id);
+          localStorage.setItem('role', data.role);
         }
         setModalMessage(data.message);
         setSuccessForm(true);
@@ -48,6 +77,8 @@ function LoginForm(props) {
         setModalMessage(error);
         setSuccessForm(true);
       });
+    }
+    
   }
   const handleSignUp = (event) => {
     event.preventDefault();
@@ -109,13 +140,17 @@ function LoginForm(props) {
           <label htmlFor="chk" aria-hidden="true">Login</label>
           <input type="email" name="email" placeholder="Email" required="" value={email} onChange={(event) => setEmail(event.target.value)} />
           <input type="password" name="pswd" placeholder="Password" required="" value={password} onChange={(event) => setPassword(event.target.value)} />
+          <select id="userRole" onChange={(event)=>{setRole(event.target.value);console.log(role)}}>
+            <option value="patient">Patient</option>
+            <option value="doctor">Doctor</option>
+          </select>
           <button className="login-button" type="submit">Login</button>
         </form>
         <Modal isOpen={successForm} style={customStyles}>
           <div className="modal-content">
             <h2>Success!</h2>
             <p>{modalMessage}</p>
-            <button onClick={() => { setSuccessForm(false); if (modalMessage === "Login successful" || modalMessage === "Register successful") { window.location.href='/home' } }}>Close</button>
+            <button onClick={() => { setSuccessForm(false); if (modalMessage === "Login successful" || modalMessage === "Register successful") { window.location.href = '/home' } }}>Close</button>
           </div>
         </Modal>
       </div>

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "./UserProfile.css";
+import "./DoctorProfile.css";
 import maps from '../../assets/maps.png'
 
-function UserProfile() {
+function DoctorProfile() {
   const [userId, setUserId] = useState(localStorage.getItem("userId"));
   const [appointments, setAppointments] = useState([]);
   const [doctors, setDoctors] = useState([]);
@@ -10,7 +10,7 @@ function UserProfile() {
   const [selectedAppointment, setSelectedAppointment] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/appointments/user/${userId}`)
+    fetch(`http://localhost:5000/appointments/doctor-appointments/${userId}`)
       .then((response) => response.json())
       .then((appointments) => {
         setAppointments(appointments);
@@ -24,7 +24,7 @@ function UserProfile() {
     const fetchDoctorForAppointment = async (appointment) => {
       try {
         const response = await fetch(
-          `http://localhost:5000/doctor/${appointment.doctorId}`
+          `http://localhost:5000/user/${appointment.userId}`
         );
         const doctor = await response.json();
         return doctor;
@@ -152,4 +152,4 @@ function UserProfile() {
   );
 }
 
-export default UserProfile;
+export default DoctorProfile;

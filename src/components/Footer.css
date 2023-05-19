@@ -15,10 +15,10 @@
     flex:50%;
 }
 .left-side :nth-child(-n+2){
-    line-height: 2.5em;
+    /* line-height: 2.5em; */
 }
 .left-side{
-    line-height: 1.5em;
+    line-height: 1.5vh;
 }
 .right-side{
     display:flex;
@@ -51,4 +51,12 @@
 .right-side, .site-mark{
     /* color: rgba(27,34,36,70); */
     color:white;
+}
+@media(width<930px){
+    .footer-container .left-side .phone-number,.footer-container .left-side .social-links{
+        display: none;
+    }
+    .footer-container .left-side{
+        line-height: 2vh;
+    }
 }

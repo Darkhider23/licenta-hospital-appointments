@@ -42,7 +42,37 @@ router.get('/doctor-appointments/:doctorId', async (req, res) => {
     res.status(500).json({ message: 'Server Error' });
   }
 })
-
+router.put('/cancel/:id',async(req,res)=>{
+  try{
+    const{id} = req.params;
+    const appointment = await Appointment.findByPk(id);
+    if (appointment) {
+      appointment.status = 'canceled';
+      await appointment.save();
+      res.status(200).json({message:'Status Updated'});
+  }else{
+    req.status(404).json({message:'Appointment not found'});
+  }
+}catch(error){
+  res.status(500).json({message:'Server Error'});
+}
+});
+router.put('/confirm/:id',async(req,res)=>{
+  try{
+    const{id} = req.params;
+    const appointment = await Appointment.findByPk(id);
+    if (appointment) {
+      appointment.status = 'confirmed';
+      await appointment.save();
+      res.status(200).json({message:'Status Updated'});
+  }else{
+    req.status(404).json({message:'Appointment not found'});
+  }
+}catch(error){
+  console.error(error);
+  res.status(500).json({message:'Server Error'});
+}
+});
 router.get('/user/:userId', async (req, res) => {
   try {
     const { userId } = req.params;

@@ -9,7 +9,7 @@ function Card(props) {
     useEffect(()=>{
         fetch(`http://localhost:5000/specializations/${props.content}`)
         .then((response)=>response.json())
-        .then((data)=>{setSpecialization(data); console.log(data)})
+        .then((data)=>{setSpecialization(data);})
     },[props.content])
     return (
         <div className="card">

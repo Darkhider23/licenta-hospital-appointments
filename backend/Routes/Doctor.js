@@ -21,8 +21,10 @@ router.post('/login',async (req, res) => {
       // Generate a JWT for the user
       const token = jwt.sign({ id: encryptedUser.id }, process.env.JWT_SECRET);
       const message="Login successful";
+      const id = encryptedUser.id;
+      const role = encryptedUser.role;
       // Send the JWT in the response
-      res.status(200).json({ token, message});
+      res.status(200).json({ token, message, id,role});
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
