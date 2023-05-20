@@ -11,7 +11,7 @@ function Diseases() {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/diseases/specializations/${id}`)
+        fetch(`http://192.168.0.165:5000/diseases/specializations/${id}`)
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
@@ -21,7 +21,7 @@ function Diseases() {
 
     useEffect(() => {
         if (selectedDisease) {
-            fetch(`http://localhost:5000/symptoms/diseases/${selectedDisease.id}`)
+            fetch(`http://192.168.0.165:5000/symptoms/diseases/${selectedDisease.id}`)
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data);

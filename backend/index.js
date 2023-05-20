@@ -20,9 +20,10 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
-app.use(cors({
-  origin: 'http://localhost:3000'
-}));
+const corsOptions ={
+  origin:['http://localhost:3000','http://192.168.0.165:3000'],
+};
+app.use(cors(corsOptions));
 
 app.use(express.json());
 const sequelize = require('./database/db');

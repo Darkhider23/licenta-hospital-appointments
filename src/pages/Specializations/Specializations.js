@@ -10,7 +10,7 @@ function Specializations() {
   async function handleInputChange(event) {
     const query = event.target.value;
     setSearchQuery(query);
-    const response = await fetch(`http://localhost:5000/specializations/search?query=${query}`);
+    const response = await fetch(`http://192.168.0.165:5000/specializations/search?query=${query}`);
     const data = await response.json();
     setResults(data.results);
   }

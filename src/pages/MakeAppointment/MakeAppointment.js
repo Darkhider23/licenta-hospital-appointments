@@ -27,11 +27,11 @@ function MakeAppointment() {
     };
 
     useEffect(() => {
-        fetch(`http://localhost:5000/appointments/doctor-appointments/${doctorId}`)
+        fetch(`http://192.168.0.165:5000/appointments/doctor-appointments/${doctorId}`)
             .then((response) => response.json())
             .then((data) => setAppointments(data));
 
-        fetch(`http://localhost:5000/doctor/${doctorId}`)
+        fetch(`http://192.168.0.165:5000/doctor/${doctorId}`)
             .then((response) => response.json())
             .then((data) => {
                 setDoctor(data);
@@ -102,7 +102,7 @@ function MakeAppointment() {
             reasonForVisit: reasonForVisit,
         };
         console.log(data);
-        fetch("http://localhost:5000/appointments", {
+        fetch("http://192.168.0.165:5000/appointments", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

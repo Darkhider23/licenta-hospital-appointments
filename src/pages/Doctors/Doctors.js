@@ -7,7 +7,7 @@ function Doctors() {
   const [data, setData] = useState();
 
   useEffect(() => {
-    axios.get('http://localhost:5000/doctor')
+    axios.get('http://192.168.0.165:5000/doctor')
       .then(response => {
         console.log(response.data);
         setData(response.data);
@@ -19,7 +19,7 @@ function Doctors() {
       const fetchImageUrls = async () => {
         const imagePromises = data.map(item => {
           const imageName = `${item.firstname}${item.lastname}`;
-          return fetch(`http://localhost:5000/image/${imageName}`)
+          return fetch(`http://192.168.0.165:5000/image/${imageName}`)
             .then(response => response.json())
             .then(data => data.url)
             .catch(error => {
@@ -58,7 +58,7 @@ function Doctors() {
                   lastname={item.lastname}
                   content={item.specializationId}
                   rating={item.rating}
-                  image={`http://localhost:5000/${item.imageUrl}`}
+                  image={`http://192.168.0.165:5000/${item.imageUrl}`}
                 /></li>
             ))}
           </ul>

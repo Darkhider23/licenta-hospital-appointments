@@ -127,6 +127,10 @@
     align-items: center;
     text-transform: capitalize;
 }
+.main-content .title-box .doctor-name a{
+    text-decoration: none;
+    color:black;
+}
 
 .main-content .time-box {
     display: flex;
@@ -165,10 +169,11 @@
 }
 
 .main-content .map-box {
-    height: 400px;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
 }
 
 .main-content .map-box img {
@@ -176,7 +181,8 @@
     border-radius: 40px;
     background-color: transparent;
     border: none;
-    height: 400px;
+    
+    width: inherit;
 }
 
 .main-content .details {
@@ -261,6 +267,7 @@
     height: 50px;
     transition: all 0.5s ease;
     text-transform: capitalize;
+    cursor: pointer;
 }
 
 .cell.active {
@@ -307,5 +314,10 @@
         margin-left: 5vh;
         margin-top: 5vh;
 
+    }
+}
+@media(width<1500px){
+    .main-content{
+        width: 35%;
     }
 }

@@ -29,7 +29,7 @@ const role = "doctor";
     const imgname = `${firstname}${lastname}`;
     formData.append('image',selectedFile);
     formData.append('imageName',imgname);
-    await fetch('http://localhost:5000/image/upload', {
+    await fetch('http://192.168.0.165:5000/image/upload', {
       method: 'POST',
       body: formData
     })
@@ -39,7 +39,7 @@ const role = "doctor";
     .catch(error=>{
       console.log(error.json());
     })
-    fetch('http://localhost:5000/doctor/register', {
+    fetch('http://192.168.0.165:5000/doctor/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

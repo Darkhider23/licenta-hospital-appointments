@@ -3,20 +3,24 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap:100px;
+    gap: 100px;
 }
-.specialization-page-container .cards-container{
+
+.specialization-page-container .cards-container {
     display: flex;
-     gap:5vh;
+    gap:5vh;
+    justify-content: center;
 }
-.specialization-page-container .s-card{
-    width: 500px;
+
+.specialization-page-container .s-card {
+    width: 30%;
     height: 400px;
     background-color: rgba(234, 245, 245, 0.404);
-    border-radius:20px;
+    border-radius: 20px;
 }
+
 .specialization-page-container .title h1 {
-    border:none;
+    border: none;
     padding: 10px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -24,42 +28,49 @@
     background-color: #0080FF80;
     box-shadow: 2px 5px 16px 0px #0B325E, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
-.specialization-page-container .s-card .card-title{
+
+.specialization-page-container .s-card .card-title {
     /* border-bottom:1px solid black; */
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
 }
-.specialization-page-container .s-card .card-content{
-    border-top:1px solid black;
+
+.specialization-page-container .s-card .card-content {
+    border-top: 1px solid black;
     border-radius: 10px;
 }
-.specialization-page-container .s-card .card-content p{
+
+.specialization-page-container .s-card .card-content p {
     padding: 30px;
     font-size: 18px;
 }
-.specialization-page-container .cards-container .s-card .button-container{
+
+.specialization-page-container .cards-container .s-card .button-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    margin-top:10vh;
-}   
-.specialization-page-container .cards-container .s-card .button-container button{
+    margin-top: 10vh;
+}
+
+.specialization-page-container .cards-container .s-card .button-container button {
     height: 5vh;
     width: 15vh;
     border-radius: 10px;
     padding: 10px;
-    border:none;
+    border: none;
     background-color: #0080ffcc;
-    color:white;
+    color: white;
     font-size: 14px;
     box-shadow: 2px 5px 16px 0px #0B325E, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
-.specialization-page-container .cards-container .s-card .button-container button:hover{
+
+.specialization-page-container .cards-container .s-card .button-container button:hover {
     transform: scale(1.1);
     transition: transform 0.4s ease-in-out;
 }
-.specialization-page-container .cards-container .s-card .button-container button:focus-visible{
-    outline:none;
+
+.specialization-page-container .cards-container .s-card .button-container button:focus-visible {
+    outline: none;
 }

@@ -10,7 +10,7 @@ function UserProfile() {
   const [selectedAppointment, setSelectedAppointment] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/appointments/user/${userId}`)
+    fetch(`http://192.168.0.165:5000/appointments/user/${userId}`)
       .then((response) => response.json())
       .then((appointments) => {
         setAppointments(appointments);
@@ -24,7 +24,7 @@ function UserProfile() {
     const fetchDoctorForAppointment = async (appointment) => {
       try {
         const response = await fetch(
-          `http://localhost:5000/doctor/${appointment.doctorId}`
+          `http://192.168.0.165:5000/doctor/${appointment.doctorId}`
         );
         const doctor = await response.json();
         return doctor;
@@ -53,7 +53,7 @@ function UserProfile() {
   };
   const handleCancelAppointment = (id) =>{
     if(id){
-    fetch(`http://localhost:5000/appointments/cancel/${id}`,{
+    fetch(`http://192.168.0.165:5000/appointments/cancel/${id}`,{
       method:'PUT'
     })
     .then((response)=>response.json())

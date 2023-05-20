@@ -10,7 +10,7 @@ function BMICalculator() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5000/bmi/calculate-bmi', {
+      const response = await fetch('http://192.168.0.165:5000/bmi/calculate-bmi', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ function BMICalculator() {
               <button type="submit">Calculate BMI</button>
             </div>
           </form>
-          {bmi && (
+         
             <div>
               <div className="status-bar">
                 <div
@@ -129,7 +129,6 @@ function BMICalculator() {
                 >{bmi >= 40 ? bmi : null}</div>
               </div>
             </div>
-          )}
         </div>
         <div className="right-card">
           <p>Obesity and overweight pose a significant health concern in the modern world, contributing to a rise in overall illness, reduced life expectancy, and diminished quality of life.
