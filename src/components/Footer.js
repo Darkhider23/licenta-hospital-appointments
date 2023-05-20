@@ -1,13 +1,10 @@
 import './Footer.css'
+import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 function Footer() {
     return (
         <div className='footer-container'>
             <div className="left-side">
-                <div className="phone-number">
-                    <FontAwesomeIcon icon="fa-solid fa-phone" />
-                    <a href="tel:0231584172">0231584172</a>
-                </div>
                 <div className="social-links">
                     <a href="https://facebook.com">
                         <FontAwesomeIcon icon="fa-brands fa-facebook-f" color='#0077b6' fontSize={30} />
@@ -25,20 +22,16 @@ function Footer() {
                     <div className="column-title">
                         Utile
                     </div>
-                    <div className="colum-content">
-                        Rezultate analize <br />
-                        Calculator analize <br />
-                        Calculator BMI<br />
-                        GDPR
+                    <div className="column-content">
+                        <NavLink to={'/calculator'}>Analisys Calculator</NavLink> <br />
+                        <NavLink to={'/bmi'}>BMI Calculator</NavLink><br />
+                        GDPR<br />
                     </div>
                 </div>
                 <div className="col-2">
-                    <div className="column-title">
-                        Contact
-                    </div>
-                    <div className="column-content">
-                        Cariere<br />
-                        Contact
+                    <div className="phone-number">
+                        <FontAwesomeIcon icon="fa-solid fa-phone" />
+                        <a href="tel:0231584172">0231584172</a>
                     </div>
                 </div>
             </div>

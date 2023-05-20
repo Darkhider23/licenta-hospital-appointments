@@ -23,6 +23,7 @@ const Appointment = sequelize.define('Appointment', {
       async notOverlapping() {
         const overlappingAppointments = await Appointment.findAll({
           where: {
+            userId :this.userId,
             doctorId: this.doctorId,
             appointmentTime: this.appointmentTime,
             [Op.or]: [
@@ -92,14 +93,12 @@ const Appointment = sequelize.define('Appointment', {
   status: {
     type: DataTypes.ENUM('pending', 'confirmed','canceled'),
     allowNull: false,
-    defaultValue: 'scheduled',
+    defaultValue: 'pending',
   },
 }, {
   tableName: 'Appointments',
   timestamps: true,
 });
-Appointment.belongsTo(User,{onDelete:'CASCADE'});
-Appointment.belongsTo(Doctor,{onDelete:'CASCADE'});
 
 
 module.exports = Appointment;

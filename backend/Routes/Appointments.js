@@ -109,13 +109,13 @@ router.put('/:id', async (req, res) => {
     const appointment = await Appointment.findByPk(req.params.id);
     if (appointment) {
       await appointment.update(req.body);
-      res.json(appointment);
+      res.status(200).json({message:'Appointment Updated',appointment});
     } else {
       res.status(404).json({ message: 'Appointment not found' });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server Error' });
+    res.status(500).json({ message: 'Server Error',errors:error.errors });
   }
 });
 
@@ -131,25 +131,7 @@ router.delete('/:id', async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server Error' });
-  }
-});
-
-// Get appointments by date range
-router.get('/range/:start/:end', async (req, res) => {
-  try {
-    const { start, end } = req.params;
-    const appointments = await Appointment.findAll({
-      where: {
-        appointmentTime: {
-          [Op.between]: [start, end],
-        },
-      },
-    });
-    res.json(appointments);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server Error' });
+    res.status(500).json({ message: 'Server Error' }); 
   }
 });
 
