@@ -81,14 +81,6 @@ const Appointment = sequelize.define('Appointment', {
   reasonForVisit: {
     type: DataTypes.STRING,
     allowNull: false,
-    set(value) {
-        const encryptedData= encrypt(value);
-        this.setDataValue('reasonForVisit', encryptedData);
-      },
-      get() {
-        const encryptedData = this.getDataValue('reasonForVisit');
-        return decrypt(encryptedData);
-      },
   },
   status: {
     type: DataTypes.ENUM('pending', 'confirmed','canceled'),
@@ -98,6 +90,40 @@ const Appointment = sequelize.define('Appointment', {
 }, {
   tableName: 'Appointments',
   timestamps: true,
+  hooks:{
+    beforeCreate: async(appointment) =>{
+      try{
+        const encryptedreason = await encrypt(appointment.reasonForVisit);
+        appointment.reasonForVisit = encryptedreason;
+      }catch(error){
+        console.error('Error encrypting appointment data',error);
+        throw error;
+      }
+    },
+    afterFind: async(appointments)=>{
+      if (!Array.isArray(appointments)) {
+        // If `users` is not an array, assume it's a single user object
+        try {
+          appointments.reasonForVisit = await decrypt(appointments.reasonForVisit);
+          
+        } catch (error) {
+          console.error('Error decrypting user data:', error);
+          throw error;
+        }
+      } else {
+        // If `users` is an array, loop through each user object and decrypt their attributes
+        try {
+          for (let i = 0; i < appointments.length; i++) {
+            appointments[i].reasonForVisit = await decrypt(appointments[i].reasonForVisit);
+            
+          }
+        } catch (error) {
+          console.error('Error decrypting user data:', error);
+          throw error;
+        }
+      }
+    },
+  }
 });
 
 

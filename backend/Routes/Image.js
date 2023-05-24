@@ -4,7 +4,7 @@ const fs = require('fs');
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
 const Image = require('../Models/Image');
-const {encrypt} = require('../utils/crypto');
+const { encrypt } = require('../utils/crypto');
 
 router.get('/', async (req, res) => {
   try {
@@ -14,7 +14,21 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: 'Error retrieving images' });
   }
 });
+router.post('/', async (req, res) => {
+  try {
+    const { filename, url, extension } = req.body;
+    const image = await Image.create({
+      filename,
+      url,
+      extension,
+    });
 
+    res.json({ message: 'Image saved successfully', image });
+  } catch (error) {
+    console.error('Error uploading image:', error);
+    res.status(500).json({ error: 'Error uploading image' });
+  }
+});
 router.post('/upload', upload.single('image'), async (req, res) => {
   try {
     const imageName = req.body.imageName;
@@ -46,8 +60,10 @@ router.post('/upload', upload.single('image'), async (req, res) => {
 // Get an image by name
 router.get('/:name', async (req, res) => {
   try {
-    const imageName = encrypt(req.params.name);
-    const image = await Image.findOne({ where: { filename: imageName } });
+    // const imageName =  await encrypt(req.params.name);
+    // console.log(imageName);
+    const image = await Image.findOne({ where: { filename: req.params.name } });
+    console.log(image);
     if (image) {
       res.status(200).json(image);
     } else {

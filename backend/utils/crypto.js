@@ -1,35 +1,52 @@
 const crypto = require('crypto');
-const pkcs7 = require('pkcs7');
+const fs = require('fs');
+const sequelize = require('../database/db');
+const Key = require('../Models/Key');
+const path = require('path');
 
-const algorithm = 'aes-256-cbc';
-const key = Buffer.from(process.env.KEY, 'hex');
-const iv = Buffer.from(process.env.IV, 'hex');
-
-function encrypt(text) {
-  const paddedData = pkcs7.pad(Buffer.from(text));
-  const cipher = crypto.createCipheriv(algorithm, key, iv);
-  let encrypted = cipher.update(paddedData, null, 'hex');
-  encrypted += cipher.final('hex');
-  return encrypted;
+function getPrivateKey() {
+  const privateKeyPath = path.join(__dirname, 'keys', 'privateKey.pem');
+    let data = fs.readFileSync(privateKeyPath, 'utf8');
+  return data;
 }
 
-function decrypt(encrypted) {
-  const decipher = crypto.createDecipheriv(algorithm, key, iv);
-  let decrypted = decipher.update(encrypted, 'hex', 'utf8');
-  decrypted += decipher.final('utf8');
-  return pkcs7.unpad(Buffer.from(decrypted)).toString();
+async function getPublicKey() {
+  await sequelize.sync(); 
+  const data = await Key.findOne();
+  return data.publicKey;
 }
-// const id = 1;
-// const idstring = id.toString();
-// console.log(typeof idstring);
-// const encryptedint = encrypt(idstring);
-// console.log(encryptedint);
-// const res = decrypt(encryptedint);
-// console.log(typeof res);
-// const result = parseInt(res);
-// console.log(typeof result);
 
+
+async function encrypt(data) {
+  const publicKey = await getPublicKey();
+  // console.log(publicKey);
+  const buffer = Buffer.from(data, 'utf8');
+  const encrypted = crypto.publicEncrypt(publicKey, buffer);
+  // console.log(encrypted.toString('base64'));
+  return encrypted.toString('base64');
+}
+
+
+function decrypt(encryptedData) {
+  const privateKey = getPrivateKey();
+  const buffer = Buffer.from(encryptedData, 'base64');
+  const decrypted = crypto.privateDecrypt(privateKey, buffer);
+  return decrypted.toString('utf8');
+}
+
+
+// (async () => {
+//   // const data = 'Hello, RSA!'; 
+//   const data = 'BVevMHkXpY9tD8bNjM7bixvSNKrfrJs2RRM9uCgSynfwN92FmTDz/biPJOd9iB1mUlccWShJIy1g3o65WDvuGA==';
+//   // const encryptedData = await encrypt(data);
+//   // const decryptedData = decrypt(encryptedData);
+//   const decryptedData = decrypt(data);
+
+//   console.log('Original Data:', data);
+//   // console.log('Encrypted Data:', encryptedData);
+//   console.log('Decrypted Data:', decryptedData);
+// })();
 module.exports = {
   encrypt,
-  decrypt,
-};
+  decrypt
+}

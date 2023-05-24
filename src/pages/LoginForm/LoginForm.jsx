@@ -26,6 +26,7 @@ function LoginForm(props) {
   const handleLogin = (event) => {
     event.preventDefault();
     console.log(email, password);
+    console.log(role);
     if(role ==='doctor'){
       fetch('http://192.168.0.165:5000/doctor/login', {
         method: 'POST',
@@ -53,7 +54,7 @@ function LoginForm(props) {
           setSuccessForm(true);
         });
     }
-    else if(role==='pacient'){
+    else {
       fetch('http://192.168.0.165:5000/user/login', {
       method: 'POST',
       headers: {
@@ -140,7 +141,7 @@ function LoginForm(props) {
           <label htmlFor="chk" aria-hidden="true">Login</label>
           <input type="email" name="email" placeholder="Email" required="" value={email} onChange={(event) => setEmail(event.target.value)} />
           <input type="password" name="pswd" placeholder="Password" required="" value={password} onChange={(event) => setPassword(event.target.value)} />
-          <select id="userRole" onChange={(event)=>{setRole(event.target.value);console.log(role)}}>
+          <select id="userRole" onChange={(event)=>{setRole(event.target.value);}}>
             <option value="patient">Patient</option>
             <option value="doctor">Doctor</option>
           </select>

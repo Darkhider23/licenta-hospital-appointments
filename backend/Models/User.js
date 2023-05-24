@@ -1,34 +1,20 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../database/db')
+const sequelize = require('../database/db');
 const { encrypt, decrypt } = require('../utils/crypto');
 
 const User = sequelize.define('User', {
   firstname: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
-    set(value) {
-      const encryptedData = encrypt(value);
-      this.setDataValue('firstname', encryptedData);
-      console.log(this.firstname);
-    },
-    get() {
-      const encryptedData = this.getDataValue('firstname');
-      return decrypt(encryptedData);
-    },
+    unique: false,
+
   },
   lastname: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
-    set(value) {
-      const encryptedData= encrypt(value);
-      this.setDataValue('lastname', encryptedData);
-    },
-    get() {
-      const encryptedData = this.getDataValue('lastname');
-      return decrypt(encryptedData);
-    },
+    unique: false,
+
+
   },
   email: {
     type: DataTypes.STRING,
@@ -38,29 +24,60 @@ const User = sequelize.define('User', {
   password: {
     type: DataTypes.STRING,
     allowNull: false,
-    set(value) {
-      const encryptedData = encrypt(value);
-      this.setDataValue('password', encryptedData);
+
+  },
+  role: {
+    type: DataTypes.STRING,
+    allowNull: false,
+
+  },
+}, {
+  tableName: 'users',
+  hooks: {
+    beforeCreate: async (user) => {
+      try {
+        const encryptedFirstname = await encrypt(user.firstname);
+        const encryptedLastname = await encrypt(user.lastname);
+        const encryptedPassword = await encrypt(user.password);
+        const encryptedRole = await encrypt(user.role);
+
+        user.firstname = encryptedFirstname;
+        user.lastname = encryptedLastname;
+        user.password = encryptedPassword;
+        user.role = encryptedRole;
+      } catch (error) {
+        console.error('Error encrypting user data:', error);
+        throw error;
+      }
     },
-    get() {
-      const encryptedData = this.getDataValue('password');
-      return decrypt(encryptedData);
+    afterFind: async (users) => {
+      if (!Array.isArray(users)) {
+        // If `users` is not an array, assume it's a single user object
+        try {
+          users.firstname = await decrypt(users.firstname);
+          users.lastname = await decrypt(users.lastname);
+          users.password = await decrypt(users.password);
+          users.role = await decrypt(users.role);
+        } catch (error) {
+          console.error('Error decrypting user data:', error);
+          throw error;
+        }
+      } else {
+        // If `users` is an array, loop through each user object and decrypt their attributes
+        try {
+          for (let i = 0; i < users.length; i++) {
+            users[i].firstname = await decrypt(users[i].firstname);
+            users[i].lastname = await decrypt(users[i].lastname);
+            users[i].password = await decrypt(users[i].password);
+            users[i].role = await decrypt(users[i].role);
+          }
+        } catch (error) {
+          console.error('Error decrypting user data:', error);
+          throw error;
+        }
+      }
     },
   },
-  role:{
-    type:DataTypes.STRING,
-    allowNull:false,
-    set(value) {
-      const encryptedData = encrypt(value);
-      this.setDataValue('role', encryptedData);
-    },
-    get() {
-      const encryptedData = this.getDataValue('role');
-      return decrypt(encryptedData);
-    },
-    }
-},{
-  tableName:'users'
 });
 
 module.exports = User;

@@ -71,7 +71,7 @@ const role = "doctor";
         isOpen && (
           <div className="form">
             <div className="close-button">
-              <button classname="toggle-btn" onClick={toggleForm}>x</button>
+              <button className="toggle-btn" onClick={toggleForm}>x</button>
               </div>
               <div className="title">Add a doctor</div>
               <div className="subtitle">Let's create your account!</div>

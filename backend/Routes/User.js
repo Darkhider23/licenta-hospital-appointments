@@ -5,12 +5,12 @@ const User = require('../Models/User');
 const session = require('express-session');
 
 router.use(session({
-  secret:process.env.JWT_SECRET,
-  resave:false,
-  saveUnitialized:false
+  secret: process.env.JWT_SECRET,
+  resave: false,
+  saveUnitialized: false
 }))
 
-router.post('/login',async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     // Find the user with the given email
@@ -25,11 +25,11 @@ router.post('/login',async (req, res) => {
 
     // Generate a JWT for the user
     const token = jwt.sign({ id: encryptedUser.id }, process.env.JWT_SECRET);
-    const message="Login successful";
+    const message = "Login successful";
     const id = encryptedUser.id;
     const role = encryptedUser.role;
     // Send the JWT in the response
-    res.status(200).json({ token, message, id,role});
+    res.status(200).json({ token, message, id, role });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -49,7 +49,7 @@ router.get('/', async (req, res) => {
 });
 router.post('/register', async (req, res) => {
   const { firstname, lastname, email, password } = req.body;
-  const role = "pacient"
+  const role = "patient";
   try {
     const user = await User.create({
       firstname,
@@ -61,9 +61,16 @@ router.post('/register', async (req, res) => {
     const message = "Register successful";
     res.status(201).json({ user, message });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error(error); // Log the error for debugging purposes
+
+    // Return a detailed error response
+    res.status(500).json({
+      message: error.message,
+      stack: error.stack, // Include the stack trace for debugging purposes
+    });
   }
 });
+
 
 router.get('/:id', async (req, res) => {
   const id = req.params.id;

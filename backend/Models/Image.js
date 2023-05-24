@@ -1,43 +1,46 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../database/db'); 
+const sequelize = require('../database/db');
 const { encrypt, decrypt } = require('../utils/crypto');
 
 const Image = sequelize.define('Image', {
   filename: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique:true,
-    set(value) {
-      const encryptedData = encrypt(value);
-      this.setDataValue('filename', encryptedData);
-    },
-    get() {
-      const encryptedData = this.getDataValue('filename');
-      return decrypt(encryptedData);
-    },
+    unique: true,
   },
   url: {
     type: DataTypes.STRING,
     allowNull: false,
-    set(value) {
-      const encryptedData = encrypt(value);
-      this.setDataValue('url', encryptedData);
-    },
-    get() {
-      const encryptedData = this.getDataValue('url');
-      return decrypt(encryptedData);
-    },
   },
   extension: {
     type: DataTypes.STRING,
     allowNull: false,
-    set(value) {
-      const encryptedData = encrypt(value);
-      this.setDataValue('extension', encryptedData);
+  },
+}, {
+  tableName: 'images',
+  hooks: {
+    beforeCreate: async (image) => {
+      try {
+        // const encryptedFileName = await encrypt(image.filename);
+        const encryptedUrl = await encrypt(image.url);
+        const encryptedExternsion = await encrypt(image.extension);
+
+        image.url = encryptedUrl;
+        image.extension = encryptedExternsion;
+      } catch (error) {
+        console.error('Error encrypting user data:', error);
+        throw error;
+      }
     },
-    get() {
-      const encryptedData = this.getDataValue('extension');
-      return decrypt(encryptedData);
+    afterFind: async (image) => {
+      try {
+        // image.firstname = await decrypt(image.filename);
+        image.url = await decrypt(image.url);
+        image.extension = await decrypt(image.extension);
+      } catch (error) {
+        console.error('Error decrypting user data:', error);
+        throw error;
+      }
     },
   },
 });
