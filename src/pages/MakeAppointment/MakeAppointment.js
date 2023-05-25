@@ -53,6 +53,7 @@ function MakeAppointment() {
                 start: appointment.startHour,
                 end: appointment.endHour,
             }));
+            console.log(times);
         return times;
     };
 

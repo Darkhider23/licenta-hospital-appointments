@@ -16,6 +16,7 @@
     "babel-plugin-macros": "^3.1.0",
     "bootstrap": "^5.2.3",
     "boxicons": "^2.1.4",
+    "emailjs-com": "^3.2.0",
     "moment": "^2.29.4",
     "mysql": "^2.18.1",
     "openssl": "^2.0.0",

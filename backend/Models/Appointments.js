@@ -100,6 +100,17 @@ const Appointment = sequelize.define('Appointment', {
         throw error;
       }
     },
+    // beforeSave: async (appointment) => {
+    //   if (appointment.changed('reasonForVisit')) {
+    //     try {
+    //       const encryptedReason = await encrypt(appointment.reasonForVisit);
+    //       appointment.reasonForVisit = encryptedReason;
+    //     } catch (error) {
+    //       console.error('Error encrypting appointment data', error);
+    //       throw error;
+    //     }
+    //   }
+    // },
     afterFind: async(appointments)=>{
       if (!Array.isArray(appointments)) {
         // If `users` is not an array, assume it's a single user object

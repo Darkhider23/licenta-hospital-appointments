@@ -64,10 +64,7 @@ function NavbarPage(props) {
         <NavLink to="/home" className="navbar-logo" id={"flex"} >
           <img src={logo} alt=""></img>
           <h2 className="first-word">
-            Spitalul
-          </h2>
-          <h2 className="second-word">
-            Judetean
+            BookMyDoc
           </h2>
         </NavLink>
         {/* <div className="menu-icon" onClick={handleClick}>

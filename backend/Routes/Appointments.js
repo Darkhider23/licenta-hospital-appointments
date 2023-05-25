@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const { Op } = require('sequelize');
 const Appointment = require('../Models/Appointments');
+const User = require('../Models/User')
+const Doctor = require('../Models/Doctor')
+
 
 // Create a new appointment
 router.post('/', async (req, res) => {
@@ -9,10 +12,7 @@ router.post('/', async (req, res) => {
     const appointment = await Appointment.create(req.body);
     res.status(201).json({ message: 'Success', appointment });
   } catch (error) {
-    console.error(error);
-    const messageError = error.errors[0].message;
-    const objerror = error.schedules;
-    res.status(500).json({ message: 'Server Error', messageError, objerror });
+    res.status(500).json({ message: 'Could not make the appointment' });
   }
 });
 
@@ -47,9 +47,8 @@ router.put('/cancel/:id',async(req,res)=>{
     const{id} = req.params;
     const appointment = await Appointment.findByPk(id);
     if (appointment) {
-      appointment.status = 'canceled';
-      await appointment.save();
-      res.status(200).json({message:'Status Updated'});
+      await appointment.update({status:'canceled'});
+      res.status(200).json({message:'Appointment Canceled'});
   }else{
     req.status(404).json({message:'Appointment not found'});
   }
@@ -62,9 +61,8 @@ router.put('/confirm/:id',async(req,res)=>{
     const{id} = req.params;
     const appointment = await Appointment.findByPk(id);
     if (appointment) {
-      appointment.status = 'confirmed';
-      await appointment.save();
-      res.status(200).json({message:'Status Updated'});
+      await appointment.update({status:'confirmed'});
+      res.status(200).json({message:'Appointment Confirmed'});
   }else{
     req.status(404).json({message:'Appointment not found'});
   }

@@ -29,7 +29,7 @@ function Specializations() {
         <div className="search-bar">
           {/* <label htmlFor="search-bar" >Search Specialization</label> */}
           <input id="search-bar" className="text" value={searchQuery} onChange={handleInputChange} placeholder="Search Specializations"  onKeyPress={handleKeyPress} />
-          <i class='bx bx-search' ></i>
+          <i className='bx bx-search' ></i>
         </div>
         {results.length > 0 && searchQuery && (
           <ul>

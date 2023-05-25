@@ -4,6 +4,7 @@ import maps from '../../assets/maps.png'
 import Modal from 'react-modal';
 import moment from 'moment';
 import { NavLink } from 'react-router-dom'
+import emailjs from 'emailjs-com';
 Modal.setAppElement('#root');
 
 function DoctorProfile() {
@@ -68,21 +69,67 @@ function DoctorProfile() {
     else
       setSelectedAppointment(appointment);
   };
-  const handleCancelAppointment = (id) => {
+  const handleCancelAppointment = (id, event) => {
+    event.preventDefault();
     if (id) {
       fetch(`http://192.168.0.165:5000/appointments/cancel/${id}`, {
         method: 'PUT'
       })
         .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          fetch(`http://192.168.0.165:5000/email/${id}`)
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data);
+              // console.log(data.data.user_name);
+              // console.log(data.data.message);
+              emailjs.send('service_vz5jlhh', 'template_hk5tz17', {
+                user_email: data.data.user_email,
+                user_name: data.data.user_name,
+                message: data.data.message,
+                status: 'canceled'
+              }, 'm1ARI0IzkxRV8CDSi')
+                .then((result) => {
+                  console.log(result.text);
+                }, (error) => {
+                  console.log(error.text);
+                });
+            })
+            .catch((error) => { console.log(error) })
+        })
         .catch((error) => { console.error(error) })
     }
   }
-  const handleConfirmAppointment = (id) => {
+  const handleConfirmAppointment = (id, event) => {
+    event.preventDefault();
     if (id) {
       fetch(`http://192.168.0.165:5000/appointments/confirm/${id}`, {
         method: 'PUT'
       })
         .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          fetch(`http://192.168.0.165:5000/email/${id}`)
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data);
+              // console.log(data.data.user_name);
+              // console.log(data.data.message);
+              emailjs.send('service_vz5jlhh', 'template_hk5tz17', {
+                user_email: data.data.user_email,
+                user_name: data.data.user_name,
+                message: data.data.message,
+                status: 'confirmed'
+              }, 'm1ARI0IzkxRV8CDSi')
+                .then((result) => {
+                  console.log(result.text);
+                }, (error) => {
+                  console.log(error.text);
+                });
+            })
+            .catch((error) => { console.log(error) })
+        })
         .catch((error) => { console.error(error) })
     }
   }
@@ -218,8 +265,8 @@ function DoctorProfile() {
                 </div>
               </div>
               <div className="doctor-button-box">
-                <button onClick={() => handleConfirmAppointment(selectedAppointment.id)}><svg className="confirm-btn" xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10s10-4.5 10-10S17.5 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m4.59-12.42L10 14.17l-2.59-2.58L6 13l4 4l8-8l-1.41-1.42Z" /></svg></button>
-                <button onClick={() => handleCancelAppointment(selectedAppointment.id)}><svg className="cancel-btn" xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><path fill="currentColor" d="m8.4 17l3.6-3.6l3.6 3.6l1.4-1.4l-3.6-3.6L17 8.4L15.6 7L12 10.6L8.4 7L7 8.4l3.6 3.6L7 15.6L8.4 17Zm3.6 5q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z" /></svg></button>
+                <button onClick={(event) => handleConfirmAppointment(selectedAppointment.id, event)}><svg className="confirm-btn" xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10s10-4.5 10-10S17.5 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m4.59-12.42L10 14.17l-2.59-2.58L6 13l4 4l8-8l-1.41-1.42Z" /></svg></button>
+                <button onClick={(event) => handleCancelAppointment(selectedAppointment.id, event)}><svg className="cancel-btn" xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><path fill="currentColor" d="m8.4 17l3.6-3.6l3.6 3.6l1.4-1.4l-3.6-3.6L17 8.4L15.6 7L12 10.6L8.4 7L7 8.4l3.6 3.6L7 15.6L8.4 17Zm3.6 5q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z" /></svg></button>
                 <button onClick={(event) => handleUpdateAppointment(selectedAppointment.id, event)}><svg className="save-btn" xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><path fill="currentColor" d="M21 7v12q0 .825-.588 1.413T19 21H5q-.825 0-1.413-.588T3 19V5q0-.825.588-1.413T5 3h12l4 4Zm-2 .85L16.15 5H5v14h14V7.85ZM12 18q1.25 0 2.125-.875T15 15q0-1.25-.875-2.125T12 12q-1.25 0-2.125.875T9 15q0 1.25.875 2.125T12 18Zm-6-8h9V6H6v4ZM5 7.85V19V5v2.85Z" /></svg></button>
               </div>
             </div>

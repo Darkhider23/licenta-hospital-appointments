@@ -66,6 +66,7 @@ const Doctor = sequelize.define('Doctor', {
       if (!Array.isArray(doctors)) {
         // If `users` is not an array, assume it's a single user object
         try {
+          console.log();
           doctors.firstname = await decrypt(doctors.firstname);
           doctors.lastname = await decrypt(doctors.lastname);
           doctors.password = await decrypt(doctors.password);
