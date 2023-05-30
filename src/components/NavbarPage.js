@@ -40,6 +40,8 @@ function NavbarPage(props) {
   const handleLogout = () => {
     localStorage.removeItem('userId');
     setUserId('');
+    localStorage.removeItem('role');
+    window.location.href='/home';
   };
 
   useEffect(() => {

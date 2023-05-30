@@ -55,6 +55,7 @@
 .right-side, .site-mark{
     /* color: rgba(27,34,36,70); */
     color:whitesmoke;
+    line-height: 2.2vh;
 }
 @media(width<930px){
     .footer-container .left-side .phone-number,.footer-container .left-side .social-links{

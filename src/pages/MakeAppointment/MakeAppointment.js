@@ -53,7 +53,7 @@ function MakeAppointment() {
                 start: appointment.startHour,
                 end: appointment.endHour,
             }));
-            console.log(times);
+        console.log(times);
         return times;
     };
 
@@ -126,14 +126,14 @@ function MakeAppointment() {
             });
         setSelectedTime('');
     };
-
-    const today = new Date().toISOString().split('T')[0];
+	
+	const today = new Date().toISOString().split('T')[0];
     const dateInput = document.getElementById('dateInput');
 
     if (dateInput) {
+        console.log(today);
         dateInput.setAttribute('min', today);
     }
-
 
     return (
         <div className="appointment-container">
@@ -169,7 +169,7 @@ function MakeAppointment() {
                     <p>{modalMessage}</p>
                     <button onClick={() => {
                         setSuccessForm(false);
-                        }}>Close</button>
+                    }}>Close</button>
                 </div>
             </Modal>
         </div>
