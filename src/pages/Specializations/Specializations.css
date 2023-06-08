@@ -45,11 +45,23 @@ outline:none;
 }
 .specializations-container .card-container{
     display: flex;
-    gap: 30vh;
     margin-top:10vh;
+    justify-content: space-around;
+    height: 50rem;
 }
 .specializations-container .card{
-    border:1px solid red;
-    height: 300px;
+    height: 50%;
+    width: 30%;
     padding: 10px;
+}
+.specializations-container .card .card-title{
+    font-size:4vh;
+    display: flex;
+    justify-content: center;
+
+}
+.specializations-container .card .content{
+    font-size:2.5vh;
+    border-top:1px solid var(--lightblue);
+    
 }

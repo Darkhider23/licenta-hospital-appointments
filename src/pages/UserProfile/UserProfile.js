@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./UserProfile.css";
 import maps from '../../assets/maps.png'
+import { NavLink } from 'react-router-dom'
 
 function UserProfile() {
   const [userId, setUserId] = useState(localStorage.getItem("userId"));
@@ -45,19 +46,19 @@ function UserProfile() {
     fetchDoctorsForAppointments();
   }, [appointments]);
   const handleAppointmentClick = (appointment) => {
-    if(selectedAppointment === appointment){
+    if (selectedAppointment === appointment) {
       setSelectedAppointment(null);
     }
     else
-    setSelectedAppointment(appointment);
+      setSelectedAppointment(appointment);
   };
-  const handleCancelAppointment = (id) =>{
-    if(id){
-    fetch(`http://192.168.0.165:5000/appointments/cancel/${id}`,{
-      method:'PUT'
-    })
-    .then((response)=>response.json())
-    .catch((error)=>{console.error(error)})
+  const handleCancelAppointment = (id) => {
+    if (id) {
+      fetch(`http://192.168.0.165:5000/appointments/cancel/${id}`, {
+        method: 'PUT'
+      })
+        .then((response) => response.json())
+        .catch((error) => { console.error(error) })
     }
   }
   function calculateDuration(startHour, endHour) {
@@ -89,6 +90,10 @@ function UserProfile() {
   return (
     <div className="appoint-container">
       <div className="side-panel">
+        <div className="title">
+        Appointments
+        </div>
+        <ul className="side-panel-ul">
         {combineAppointments.map((appointment, index) => (
           <li
             className={selectedAppointment === appointment ? "appointment-box active" : "appointment-box"}
@@ -99,6 +104,7 @@ function UserProfile() {
             <p>{appointment.reasonForVisit}</p>
           </li>
         ))}
+        </ul>
       </div>
       {selectedAppointment && (<>
         <div className="main-content">
@@ -113,8 +119,8 @@ function UserProfile() {
               </div>
             </div>
             <div className="button-box">
-              <span>Cancel<br/> Appointment</span>
-              <button onClick={()=>handleCancelAppointment(selectedAppointment.id)}><svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><path fill="currentColor" d="m8.4 17l3.6-3.6l3.6 3.6l1.4-1.4l-3.6-3.6L17 8.4L15.6 7L12 10.6L8.4 7L7 8.4l3.6 3.6L7 15.6L8.4 17Zm3.6 5q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z" /></svg></button>
+              <span>Cancel<br /> Appointment</span>
+              <button onClick={() => handleCancelAppointment(selectedAppointment.id)}><svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><path fill="currentColor" d="m8.4 17l3.6-3.6l3.6 3.6l1.4-1.4l-3.6-3.6L17 8.4L15.6 7L12 10.6L8.4 7L7 8.4l3.6 3.6L7 15.6L8.4 17Zm3.6 5q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z" /></svg></button>
             </div>
           </div>
 
@@ -136,7 +142,7 @@ function UserProfile() {
             <div className="status-box">
               {selectedAppointment.status === 'pending' && <div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M7 13.5q.625 0 1.063-.438T8.5 12q0-.625-.438-1.063T7 10.5q-.625 0-1.063.438T5.5 12q0 .625.438 1.063T7 13.5Zm5 0q.625 0 1.063-.438T13.5 12q0-.625-.438-1.063T12 10.5q-.625 0-1.063.438T10.5 12q0 .625.438 1.063T12 13.5Zm5 0q.625 0 1.063-.438T18.5 12q0-.625-.438-1.063T17 10.5q-.625 0-1.063.438T15.5 12q0 .625.438 1.063T17 13.5ZM12 22q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z" /></svg><span>Pending</span></div>}
               {selectedAppointment.status === 'confirmed' &&
-                <div><svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><path fill="currentColor" d="M256 16C123.5 16 16 123.5 16 256c0 132.6 107.5 240 240 240c132.6 0 240-107.4 240-240S388.6 16 256 16zm0 60c99.4 0 180 80.6 180 180s-80.6 180-180 180S76 355.4 76 256S156.6 76 256 76zm91.3 64.2c-6.5 0-12.5 2.4-16.8 8.2c-52 70.1-69 96.5-106 169.8c-8.4-11.1-65.6-72.4-93.9-94.1c-14.2-10.9-41.3 27.2-31.6 37.1C142.6 306.1 220.1 406 232.7 405c21.4-1.7 75.1-136.8 148.8-233.7c8-10.4-15-31.3-34.2-31.1z" /></svg><span>Confirmed</span></div>}
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="currentColor" d="M256 16C123.5 16 16 123.5 16 256c0 132.6 107.5 240 240 240c132.6 0 240-107.4 240-240S388.6 16 256 16zm0 60c99.4 0 180 80.6 180 180s-80.6 180-180 180S76 355.4 76 256S156.6 76 256 76zm91.3 64.2c-6.5 0-12.5 2.4-16.8 8.2c-52 70.1-69 96.5-106 169.8c-8.4-11.1-65.6-72.4-93.9-94.1c-14.2-10.9-41.3 27.2-31.6 37.1C142.6 306.1 220.1 406 232.7 405c21.4-1.7 75.1-136.8 148.8-233.7c8-10.4-15-31.3-34.2-31.1z" /></svg><span>Confirmed</span></div>}
               {selectedAppointment.status === 'canceled' &&
                 <div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m8.4 17l3.6-3.6l3.6 3.6l1.4-1.4l-3.6-3.6L17 8.4L15.6 7L12 10.6L8.4 7L7 8.4l3.6 3.6L7 15.6L8.4 17Zm3.6 5q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z" /></svg><span>Canceled</span></div>}
             </div>

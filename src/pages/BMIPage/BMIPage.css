@@ -17,8 +17,8 @@
 }
 .bmi-content{
     display: flex;
-    justify-content: space-around;
     width: 100%;
+    gap:10vh;
 }
 .bmi-content .left-card{
     background-color: rgba(248, 248, 248, 0.616);;
@@ -100,8 +100,10 @@ margin-top:5vh;
 .weigth-container, .heigth-container {
     display: flex;
     align-items: center;
+    justify-content: center;
     background-color: gray;
-    height: 140px;
+    height: 200px;
+    width: 40%;
     padding: 10px;
     border-radius: 10px;
 }
@@ -115,7 +117,6 @@ margin-top:5vh;
     font-size: 40px;
     width: 100px;
     direction: rtl;
-    margin-right:10px;
 }
 .weigth-container i,.heigth-container i,.weigth-container span,.heigth-container span{
     color:white;
@@ -140,9 +141,17 @@ margin-top:5vh;
     box-shadow: var(--shadowColor);
 }
 
-
+.middle-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+}
 .status-bar {
     display: flex;
+    align-items: center;
+    justify-content: center;
     width: 400px;
     margin-top: 5vh;
 }
@@ -170,4 +179,9 @@ margin-top:5vh;
 .last {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
+}
+@media(width<1200px){
+    .middle-card{
+        width: 80%;
+    }
 }

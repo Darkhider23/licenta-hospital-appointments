@@ -74,7 +74,7 @@ function BMICalculator() {
             </div>
           </div>
         </div>
-        <div>
+        <div className='middle-card'>
           <form className='form-container' onSubmit={handleFormSubmit}>
             <div className="input-box">
               <label className='heigth-container'>

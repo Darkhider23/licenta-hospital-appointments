@@ -39,6 +39,7 @@ const treatmentRouter = require('./Routes/Treatment')
 const analysisPricesRouter = require('./Routes/AnalisysPrices');
 const BMIRouter = require('./Routes/BMIRoute')
 const emailRouter = require('./Routes/Email')
+const medicalrecordRouter = require('./Routes/MedicalRecord')
 
 app.use("/user", userRouter);
 app.use("/doctor", doctorRouter);
@@ -53,6 +54,7 @@ app.use("/analisysprices",analysisPricesRouter);
 app.use("/bmi",BMIRouter);
 app.use("/email",emailRouter);
 app.use('/uploads', express.static('uploads'));
+app.use('/medical-records',medicalrecordRouter)
 
 sequelize.sync().then(() => {
   app.listen(5000, () => {
