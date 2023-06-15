@@ -88,33 +88,39 @@ function NavbarPage(props) {
               Specializations
             </NavLink>
           </li>
-          <li className='nav-item dropdown'>
-            <NavLink className="nav-links" >
-              Tools
-            </NavLink>
-            <ul className="dropdown-menu">
-              <li><NavLink to={'/calculator'}>Analisys Calculator</NavLink></li>
-              <li><NavLink to={'/bmi'}>BMI Calculator</NavLink></li>
-            </ul>
-          </li>
-          <li className='nav-item'>
-            <NavLink to={'/admin'} className={(navData) => (navData.isActive ? "active-link" : "nav-links")}>
-              Admin
-            </NavLink>
-          </li>
+          {
+            role === 'admin' ? <><li className='nav-item'>
+              <NavLink to={'/admin'} className={(navData) => (navData.isActive ? "active-link" : "nav-links")}>
+                Admin
+              </NavLink>
+            </li></> : null
+          }
 
           {
             userId ? <>
+              <li className='nav-item dropdown'>
+                <NavLink className="nav-links" >
+                  Tools
+                </NavLink>
+                <ul className="dropdown-menu">
+                  <li><NavLink to={'/calculator'}>Analisys Calculator</NavLink></li>
+                  <li><NavLink to={'/bmi'}>BMI Calculator</NavLink></li>
+                </ul>
+              </li>
               <li className='nav-item'>
                 <NavLink to={role === 'doctor' ? '/doctorprofile' : '/userprofile'} className={(navData) => (navData.isActive ? "active-link username" : "nav-links username")}>
                   {firstname}<br />{lastname}
                 </NavLink>
               </li>
-              <li className='nav-item'>
+              { role ==='patient'?<>
+                <li className='nav-item'>
                 <NavLink to={`/medicalrecord/${userId}`} className={(navData) => (navData.isActive ? "active-link" : "nav-links")} >
                   MedicalRecord
                 </NavLink>
               </li>
+              </>
+              :null
+              }
 
               <div className="logout-container">
                 <button className='logout-btn' onClick={handleLogout}>Logout</button>

@@ -53,7 +53,7 @@ function MakeAppointment() {
                 start: appointment.startHour,
                 end: appointment.endHour,
             }));
-        console.log(times);
+        
         return times;
     };
 
@@ -102,7 +102,6 @@ function MakeAppointment() {
             status: "pending",
             reasonForVisit: reasonForVisit,
         };
-        console.log(data);
         fetch("http://192.168.0.165:5000/appointments", {
             method: "POST",
             headers: {
@@ -116,7 +115,7 @@ function MakeAppointment() {
                     setModalMessage('We have received your appointment, We will notify you as soon as possible after a doctor reviewed it');
                     setSuccessForm(true)
                 }
-                console.log(data);
+                
             })
 
             .catch((error) => {
@@ -131,7 +130,6 @@ function MakeAppointment() {
     const dateInput = document.getElementById('dateInput');
 
     if (dateInput) {
-        console.log(today);
         dateInput.setAttribute('min', today);
     }
 

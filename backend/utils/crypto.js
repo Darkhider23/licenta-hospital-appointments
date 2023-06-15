@@ -4,22 +4,63 @@ const sequelize = require('../database/db');
 const Key = require('../Models/Key');
 const path = require('path');
 
-function getPrivateKey() {
-  const privateKeyPath = path.join(__dirname, 'keys', 'privateKey.pem');
-    let data = fs.readFileSync(privateKeyPath, 'utf8');
-  return data;
+function generateRSAKeyPair(){
+  const {publicKey,privateKey} = crypto.generateKeyPairSync('rsa',{
+    modulusLength:512,
+    publicKeyEncoding:{
+      type:'spki',
+      format:'pem',
+    },
+    privateKeyEncoding:{
+      type:'pkcs8',
+      format:'pem',
+    },
+  });
+  return{
+    publicKey:publicKey,
+    privateKey:privateKey
+  };
 }
 
-async function getPublicKey() {
+async function storeKeys(keyword){
+  const {publicKey,privateKey} = generateRSAKeyPair();
+  await Key.create({
+    keyword:keyword,
+    publicKey:publicKey,
+    privateKey:privateKey,
+  });
+}
+
+
+async function getPrivateKey(email) {
   await sequelize.sync(); 
-  const data = await Key.findOne();
-  return data.publicKey;
+  const data = await Key.findOne({
+    where: {
+      email: email
+    }
+  });
+  if (data) {
+    return data.privateKey;
+  }
+  return null; // If no matching record found
+}
+async function getPublicKey(email) {
+  await sequelize.sync(); 
+  const data = await Key.findOne({
+    where: {
+      email: email
+    }
+  });
+  if (data) {
+    return data.publicKey;
+  }
+  return null; // If no matching record found
 }
 
 
-async function encrypt(data) {
-  const publicKey = await getPublicKey();
-  // console.log(publicKey);
+async function encrypt(data,email) {
+  const publicKey = await getPublicKey(email);
+  // console.log(email);
   const buffer = Buffer.from(data, 'utf8');
   const encrypted = crypto.publicEncrypt(publicKey, buffer);
   // console.log(encrypted.toString('base64'));
@@ -27,8 +68,9 @@ async function encrypt(data) {
 }
 
 
-function decrypt(encryptedData) {
-  const privateKey = getPrivateKey();
+async function decrypt(encryptedData,email) {
+  const privateKey = await getPrivateKey(email);
+  console.log(email);
   const buffer = Buffer.from(encryptedData, 'base64');
   const decrypted = crypto.privateDecrypt(privateKey, buffer);
   return decrypted.toString('utf8');
@@ -37,16 +79,17 @@ function decrypt(encryptedData) {
 
 // (async () => {
 //   // const data = 'Hello, RSA!'; 
-//   const data = 'BVevMHkXpY9tD8bNjM7bixvSNKrfrJs2RRM9uCgSynfwN92FmTDz/biPJOd9iB1mUlccWShJIy1g3o65WDvuGA==';
+//   const data = 'e2tcF3MRoqbsO4476wPW56kkodxhyNy+TPHXun4XZrHzlUVoPMbTrEKI8lYxCn5vMpgn7Mhe4cxrDq2SM2/D+g==';
 //   // const encryptedData = await encrypt(data);
 //   // const decryptedData = decrypt(encryptedData);
-//   const decryptedData = decrypt(data);
-
-//   console.log('Original Data:', data);
-//   // console.log('Encrypted Data:', encryptedData);
-//   console.log('Decrypted Data:', decryptedData);
+//   const decryptedData = await decrypt(data,'test@gmail.com');
+//   console.log(decryptedData);
+//   // console.log('Original Data:', data);
+//   // // console.log('Encrypted Data:', encryptedData);
+//   // console.log('Decrypted Data:', decryptedData);
 // })();
 module.exports = {
   encrypt,
-  decrypt
+  decrypt,
+  storeKeys
 }

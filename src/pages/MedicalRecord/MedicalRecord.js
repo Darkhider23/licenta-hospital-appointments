@@ -44,8 +44,6 @@ function MedicalRecord() {
       })
   }, [pacientid])
   const handleRecordChange = (e) => {
-    e.preventDefault();
-    console.log(record);
     fetch(`http://192.168.0.165:5000/medical-records/${record.medicalRecordId}`, {
       method: 'PUT',
       headers: {
@@ -147,13 +145,20 @@ function MedicalRecord() {
               )}
             </div>
           </div>
-          <div className="button-box">
+          {
+            userrole==='patient'?
+            <>
+            <div className="button-box">
           <button type="submit">Save</button>
             </div>
+            </>
+            :null
+          }
+          
           </form>
         </div>
         <div className={userrole==='pacient'? 'right-box':'right-box-user'}>
-          <form onSubmit={(e) => handleRecordChange(e)}>
+          <form className onSubmit={(e) => handleRecordChange(e)}>
             <div className="diagnosis">
               Diagnosis
               {userrole === 'doctor' ? (

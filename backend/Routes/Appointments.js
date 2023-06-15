@@ -1,14 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const { Op } = require('sequelize');
+const sequelize = require('../database/db')
 const Appointment = require('../Models/Appointments');
 const User = require('../Models/User')
 const Doctor = require('../Models/Doctor')
+const crypto = require('../utils/crypto')
 
 
 // Create a new appointment
 router.post('/', async (req, res) => {
-  try {
+  try{
     const appointment = await Appointment.create(req.body);
     res.status(201).json({ message: 'Success', appointment });
   } catch (error) {
@@ -42,34 +44,34 @@ router.get('/doctor-appointments/:doctorId', async (req, res) => {
     res.status(500).json({ message: 'Server Error' });
   }
 })
-router.put('/cancel/:id',async(req,res)=>{
-  try{
-    const{id} = req.params;
+router.put('/cancel/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
     const appointment = await Appointment.findByPk(id);
     if (appointment) {
-      await appointment.update({status:'canceled'});
-      res.status(200).json({message:'Appointment Canceled'});
-  }else{
-    req.status(404).json({message:'Appointment not found'});
+      await appointment.update({ status: 'canceled' });
+      res.status(200).json({ message: 'Appointment Canceled' });
+    } else {
+      req.status(404).json({ message: 'Appointment not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Server Error' });
   }
-}catch(error){
-  res.status(500).json({message:'Server Error'});
-}
 });
-router.put('/confirm/:id',async(req,res)=>{
-  try{
-    const{id} = req.params;
+router.put('/confirm/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
     const appointment = await Appointment.findByPk(id);
     if (appointment) {
-      await appointment.update({status:'confirmed'});
-      res.status(200).json({message:'Appointment Confirmed'});
-  }else{
-    req.status(404).json({message:'Appointment not found'});
+      await appointment.update({ status: 'confirmed' });
+      res.status(200).json({ message: 'Appointment Confirmed' });
+    } else {
+      req.status(404).json({ message: 'Appointment not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
   }
-}catch(error){
-  console.error(error);
-  res.status(500).json({message:'Server Error'});
-}
 });
 router.get('/user/:userId', async (req, res) => {
   try {
@@ -107,13 +109,13 @@ router.put('/:id', async (req, res) => {
     const appointment = await Appointment.findByPk(req.params.id);
     if (appointment) {
       await appointment.update(req.body);
-      res.status(200).json({message:'Appointment Updated',appointment});
+      res.status(200).json({ message: 'Appointment Updated', appointment });
     } else {
       res.status(404).json({ message: 'Appointment not found' });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server Error',errors:error.errors });
+    res.status(500).json({ message: 'Server Error', errors: error.errors });
   }
 });
 
@@ -129,7 +131,7 @@ router.delete('/:id', async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server Error' }); 
+    res.status(500).json({ message: 'Server Error' });
   }
 });
 

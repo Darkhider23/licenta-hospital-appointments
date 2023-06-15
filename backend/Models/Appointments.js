@@ -90,51 +90,51 @@ const Appointment = sequelize.define('Appointment', {
 }, {
   tableName: 'Appointments',
   timestamps: true,
-  hooks:{
-    beforeCreate: async(appointment) =>{
-      try{
-        const encryptedreason = await encrypt(appointment.reasonForVisit);
-        appointment.reasonForVisit = encryptedreason;
-      }catch(error){
-        console.error('Error encrypting appointment data',error);
-        throw error;
-      }
-    },
-    // beforeSave: async (appointment) => {
-    //   if (appointment.changed('reasonForVisit')) {
-    //     try {
-    //       const encryptedReason = await encrypt(appointment.reasonForVisit);
-    //       appointment.reasonForVisit = encryptedReason;
-    //     } catch (error) {
-    //       console.error('Error encrypting appointment data', error);
-    //       throw error;
-    //     }
-    //   }
-    // },
-    afterFind: async(appointments)=>{
-      if (!Array.isArray(appointments)) {
-        // If `users` is not an array, assume it's a single user object
-        try {
-          appointments.reasonForVisit = await decrypt(appointments.reasonForVisit);
+  // hooks:{
+  //   beforeCreate: async(appointment) =>{
+  //     try{
+  //       const encryptedreason = await encrypt(appointment.reasonForVisit,appointment.id);
+  //       appointment.reasonForVisit = encryptedreason;
+  //     }catch(error){
+  //       console.error('Error encrypting appointment data',error);
+  //       throw error;
+  //     }
+  //   },
+  //   // beforeSave: async (appointment) => {
+  //   //   if (appointment.changed('reasonForVisit')) {
+  //   //     try {
+  //   //       const encryptedReason = await encrypt(appointment.reasonForVisit);
+  //   //       appointment.reasonForVisit = encryptedReason;
+  //   //     } catch (error) {
+  //   //       console.error('Error encrypting appointment data', error);
+  //   //       throw error;
+  //   //     }
+  //   //   }
+  //   // },
+  //   afterFind: async(appointments)=>{
+  //     if (!Array.isArray(appointments)) {
+  //       // If `users` is not an array, assume it's a single user object
+  //       try {
+  //         appointments.reasonForVisit = await decrypt(appointments.reasonForVisit,appointments.id);
           
-        } catch (error) {
-          console.error('Error decrypting user data:', error);
-          throw error;
-        }
-      } else {
-        // If `users` is an array, loop through each user object and decrypt their attributes
-        try {
-          for (let i = 0; i < appointments.length; i++) {
-            appointments[i].reasonForVisit = await decrypt(appointments[i].reasonForVisit);
+  //       } catch (error) {
+  //         console.error('Error decrypting user data:', error);
+  //         throw error;
+  //       }
+  //     } else {
+  //       // If `users` is an array, loop through each user object and decrypt their attributes
+  //       try {
+  //         for (let i = 0; i < appointments.length; i++) {
+  //           appointments[i].reasonForVisit = await decrypt(appointments[i].reasonForVisit);
             
-          }
-        } catch (error) {
-          console.error('Error decrypting user data:', error);
-          throw error;
-        }
-      }
-    },
-  }
+  //         }
+  //       } catch (error) {
+  //         console.error('Error decrypting user data:', error);
+  //         throw error;
+  //       }
+  //     }
+  //   },
+  // }
 });
 
 

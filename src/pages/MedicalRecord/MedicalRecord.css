@@ -122,7 +122,7 @@
 .right-box-user .treatment span{
     margin-top:5vh;
 }
-.right-box .button-box button,.record-box .button-box button{
+.right-box-user .button-box button,.record-box .button-box button{
     height: 3vh;
     padding: 10px;
     border-radius: 10px;
@@ -133,7 +133,7 @@
     background-color: var(--lightblue);
     transition: all 0.4s ease-in-out;
 }
-.right-box .button-box button:hover,.record-box .button-box button:hover{
+.right-box-user .button-box button:hover,.record-box .button-box button:hover{
     transform: scale(1.2);
 }
 .record-box input{

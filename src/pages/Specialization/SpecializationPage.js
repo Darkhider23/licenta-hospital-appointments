@@ -14,10 +14,10 @@ function SpecializationPage() {
       .then((data) => { setSpecialization(data); });
     fetch(`http://192.168.0.165:5000/doctor/specializations/${id}`)
       .then((response) => response.json())
-      .then((data) => { console.log(data); setDoctors(data) });
+      .then((data) => {  setDoctors(data) });
     fetch(`http://192.168.0.165:5000/diseases/specializations/${id}`)
       .then((response) => response.json())
-      .then((data) => { console.log(data); setDiseases(data) });
+      .then((data) => {  setDiseases(data) });
   }, [id]);
 
   const handleDiseaseClick = () =>{

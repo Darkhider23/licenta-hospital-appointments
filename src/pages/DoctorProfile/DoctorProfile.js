@@ -5,6 +5,7 @@ import Modal from 'react-modal';
 import moment from 'moment';
 import { NavLink } from 'react-router-dom'
 import emailjs from 'emailjs-com';
+import { render } from "@testing-library/react";
 Modal.setAppElement('#root');
 
 function DoctorProfile() {
@@ -134,8 +135,6 @@ function DoctorProfile() {
     }
   }
   const handleUpdateAppointment = (id, event) => {
-    event.preventDefault();
-    console.log(selectedAppointment);
     if (id) {
       fetch(`http://192.168.0.165:5000/appointments/${id}`, {
         method: 'PUT',
@@ -232,8 +231,28 @@ function DoctorProfile() {
       </div>
     );
   };
-
-
+  // const renderlistener = ()=>{
+  //   const startHourInput = document.getElementById('startHour');
+  //   const endHourInput = document.getElementById('endHour');
+  
+  //   startHourInput.addEventListener('change', () => {
+  //     const startHourValue = startHourInput.value;
+  //     const endHourValue = endHourInput.value;
+  
+  //     if (startHourValue > endHourValue || endHourValue === '') {
+  //       const startHour = new Date(`1970-01-01T${startHourValue}:00`);
+  //       const newEndHour = new Date(startHour.getTime() + 60 * 60 * 1000);
+  //       const newEndHourString = newEndHour.toTimeString().slice(0, 5);
+  //       endHourInput.value = newEndHourString;
+  //       setSelectedAppointment({
+  //         ...selectedAppointment,
+  //         startHour:startHourValue,
+  //         endHour: newEndHour
+  //       })
+  //     }
+  //   });
+  // }
+  
   return (
     <div className="appoint-container">
       {/* <div className="side-panel">
@@ -270,9 +289,9 @@ function DoctorProfile() {
                 <button onClick={(event) => handleUpdateAppointment(selectedAppointment.id, event)}><svg className="save-btn" xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><path fill="currentColor" d="M21 7v12q0 .825-.588 1.413T19 21H5q-.825 0-1.413-.588T3 19V5q0-.825.588-1.413T5 3h12l4 4Zm-2 .85L16.15 5H5v14h14V7.85ZM12 18q1.25 0 2.125-.875T15 15q0-1.25-.875-2.125T12 12q-1.25 0-2.125.875T9 15q0 1.25.875 2.125T12 18Zm-6-8h9V6H6v4ZM5 7.85V19V5v2.85Z" /></svg></button>
               </div>
             </div>
-
             <div className="time-box">
               <div className="date-box">
+              {/* {renderlistener()} */}
                 <input
                   type="date"
                   id="appointmentTime"
