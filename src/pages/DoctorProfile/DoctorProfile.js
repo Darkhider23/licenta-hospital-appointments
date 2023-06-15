@@ -9,6 +9,7 @@ import { render } from "@testing-library/react";
 Modal.setAppElement('#root');
 
 function DoctorProfile() {
+  const today = new Date().toISOString().split('T')[0];
   const [userId, setUserId] = useState(localStorage.getItem("userId"));
   const [appointments, setAppointments] = useState([]);
   const [combineAppointments, setCombinedAppointments] = useState([]);
@@ -234,11 +235,11 @@ function DoctorProfile() {
   // const renderlistener = ()=>{
   //   const startHourInput = document.getElementById('startHour');
   //   const endHourInput = document.getElementById('endHour');
-  
+
   //   startHourInput.addEventListener('change', () => {
   //     const startHourValue = startHourInput.value;
   //     const endHourValue = endHourInput.value;
-  
+
   //     if (startHourValue > endHourValue || endHourValue === '') {
   //       const startHour = new Date(`1970-01-01T${startHourValue}:00`);
   //       const newEndHour = new Date(startHour.getTime() + 60 * 60 * 1000);
@@ -252,7 +253,7 @@ function DoctorProfile() {
   //     }
   //   });
   // }
-  
+
   return (
     <div className="appoint-container">
       {/* <div className="side-panel">
@@ -291,11 +292,12 @@ function DoctorProfile() {
             </div>
             <div className="time-box">
               <div className="date-box">
-              {/* {renderlistener()} */}
+                {/* {renderlistener()} */}
                 <input
                   type="date"
                   id="appointmentTime"
                   value={selectedAppointment.appointmentTime}
+                  min={today}
                   onChange={(e) =>
                     setSelectedAppointment({
                       ...selectedAppointment,

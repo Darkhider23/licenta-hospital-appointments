@@ -32,11 +32,11 @@ async function storeKeys(keyword){
 }
 
 
-async function getPrivateKey(email) {
+async function getPrivateKey(keyword) {
   await sequelize.sync(); 
   const data = await Key.findOne({
     where: {
-      email: email
+      keyword: keyword
     }
   });
   if (data) {
@@ -44,11 +44,11 @@ async function getPrivateKey(email) {
   }
   return null; // If no matching record found
 }
-async function getPublicKey(email) {
+async function getPublicKey(keyword) {
   await sequelize.sync(); 
   const data = await Key.findOne({
     where: {
-      email: email
+      keyword: keyword
     }
   });
   if (data) {
