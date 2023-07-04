@@ -17,7 +17,7 @@ function SpecializationPage() {
       .then((data) => { console.log(data); setDoctors(data) });
     fetch(`http://localhost:5000/diseases/specializations/${id}`)
       .then((response) => response.json())
-      .then((data) => { console.log(data); setDiseases(data) });
+      .then((data) => {  setDiseases(data) });
   }, [id]);
 
   const handleDiseaseClick = () =>{

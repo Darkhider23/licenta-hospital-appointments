@@ -9,7 +9,6 @@ function Doctors() {
   useEffect(() => {
     axios.get('http://localhost:5000/doctor')
       .then(response => {
-        console.log(response.data);
         setData(response.data);
       })
       .catch(error => console.log(error));

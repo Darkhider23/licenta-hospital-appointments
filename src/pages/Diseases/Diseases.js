@@ -14,7 +14,7 @@ function Diseases() {
         fetch(`http://localhost:5000/diseases/specializations/${id}`)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
+                
                 setDiseases(data);
             });
     }, []);
@@ -24,7 +24,7 @@ function Diseases() {
             fetch(`http://localhost:5000/symptoms/diseases/${selectedDisease.id}`)
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data);
+                    
                     setSymptoms(data);
                 });
         }

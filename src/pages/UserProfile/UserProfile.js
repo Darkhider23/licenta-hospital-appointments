@@ -57,7 +57,8 @@ function UserProfile() {
       fetch(`http://localhost:5000/appointments/cancel/${id}`, {
         method: 'PUT'
       })
-        .then((response) => response.json())
+        .then((response) => {response.json();window.location.reload();})
+
         .catch((error) => { console.error(error) })
     }
   }

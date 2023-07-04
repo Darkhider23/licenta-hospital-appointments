@@ -3,6 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const User = require('../Models/User');
 const session = require('express-session');
+const crypto = require('../utils/crypto')
 
 router.use(session({
   secret: process.env.JWT_SECRET,
@@ -51,6 +52,8 @@ router.post('/register', async (req, res) => {
   const { firstname, lastname, email, password } = req.body;
   const role = "patient";
   try {
+    await crypto.storeKeys(email);
+
     const user = await User.create({
       firstname,
       lastname,

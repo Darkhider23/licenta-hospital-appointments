@@ -6,6 +6,7 @@ import { useState } from "react";
 
 function Card(props) {
     const [specialization,setSpecialization] = useState();
+    const role = localStorage.getItem('role');
     useEffect(()=>{
         fetch(`http://localhost:5000/specializations/${props.content}`)
         .then((response)=>response.json())
@@ -23,7 +24,7 @@ function Card(props) {
                     <h5>{specialization && specialization.name}</h5>
                 </div>
                 <div className="rating">
-                    {props.id && (
+                    {props.id && role==='patient' ?<>
                         <Link className="button-appointnmet"
                             to={{
                                 pathname: '/makeappointment',
@@ -33,7 +34,8 @@ function Card(props) {
                         >
                             Make Appointment
                         </Link>
-                    )}
+                        </>:null
+                    }
 
                     {/* <button onClick={handleMakeAppointment}><i className='bx bx-time'></i>Make appointment</button> */}
                     <h5><span className="star">{'\u2605'}</span><span className="rate-text">{props.rating}</span></h5>

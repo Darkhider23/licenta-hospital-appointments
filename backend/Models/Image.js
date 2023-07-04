@@ -22,8 +22,8 @@ const Image = sequelize.define('Image', {
     beforeCreate: async (image) => {
       try {
         // const encryptedFileName = await encrypt(image.filename);
-        const encryptedUrl = await encrypt(image.url);
-        const encryptedExternsion = await encrypt(image.extension);
+        const encryptedUrl = await encrypt(image.url,image.filename);
+        const encryptedExternsion = await encrypt(image.extension,image.filename);
 
         image.url = encryptedUrl;
         image.extension = encryptedExternsion;
@@ -35,8 +35,8 @@ const Image = sequelize.define('Image', {
     afterFind: async (image) => {
       try {
         // image.firstname = await decrypt(image.filename);
-        image.url = await decrypt(image.url);
-        image.extension = await decrypt(image.extension);
+        image.url = await decrypt(image.url,image.filename);
+        image.extension = await decrypt(image.extension,image.filename);
       } catch (error) {
         console.error('Error decrypting user data:', error);
         throw error;

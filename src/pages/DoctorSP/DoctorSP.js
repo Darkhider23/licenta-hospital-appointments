@@ -10,7 +10,6 @@ function DoctorsSP() {
   useEffect(()=>{
       axios.get(`http://localhost:5000/doctor/specializations/${id}`)
       .then(response => {
-        console.log(response.data);
         setData(response.data);
       })
       .catch(error => console.log(error));

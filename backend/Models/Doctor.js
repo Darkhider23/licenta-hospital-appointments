@@ -48,10 +48,10 @@ const Doctor = sequelize.define('Doctor', {
   hooks: {
     beforeCreate: async (doctor) => {
       try {
-        const encryptedFirstname = await encrypt(doctor.firstname);
-        const encryptedLastname = await encrypt(doctor.lastname);
-        const encryptedPassword = await encrypt(doctor.password);
-        const encryptedRole = await encrypt(doctor.role);
+        const encryptedFirstname = await encrypt(doctor.firstname,doctor.email);
+        const encryptedLastname = await encrypt(doctor.lastnamedoctor.email);
+        const encryptedPassword = await encrypt(doctor.passworddoctor.email);
+        const encryptedRole = await encrypt(doctor.roledoctor.email);
 
         doctor.firstname = encryptedFirstname;
         doctor.lastname = encryptedLastname;
@@ -67,10 +67,10 @@ const Doctor = sequelize.define('Doctor', {
         // If `users` is not an array, assume it's a single user object
         try {
           console.log();
-          doctors.firstname = await decrypt(doctors.firstname);
-          doctors.lastname = await decrypt(doctors.lastname);
-          doctors.password = await decrypt(doctors.password);
-          doctors.role = await decrypt(doctors.role);
+          doctors.firstname = await decrypt(doctors.firstname,doctors.email);
+          doctors.lastname = await decrypt(doctors.lastname,doctors.email);
+          doctors.password = await decrypt(doctors.password,doctors.email);
+          doctors.role = await decrypt(doctors.role,doctors.email);
         } catch (error) {
           console.error('Error decrypting user data:', error);
           throw error;
@@ -79,10 +79,10 @@ const Doctor = sequelize.define('Doctor', {
         // If `users` is an array, loop through each user object and decrypt their attributes
         try {
           for (let i = 0; i < doctors.length; i++) {
-            doctors[i].firstname = await decrypt(doctors[i].firstname);
-            doctors[i].lastname = await decrypt(doctors[i].lastname);
-            doctors[i].password = await decrypt(doctors[i].password);
-            doctors[i].role = await decrypt(doctors[i].role);
+            doctors[i].firstname = await decrypt(doctors[i].firstname,doctors[i].email);
+            doctors[i].lastname = await decrypt(doctors[i].lastname,doctors[i].email);
+            doctors[i].password = await decrypt(doctors[i].password,doctors[i].email);
+            doctors[i].role = await decrypt(doctors[i].role,doctors[i].email);
           }
         } catch (error) {
           console.error('Error decrypting user data:', error);
