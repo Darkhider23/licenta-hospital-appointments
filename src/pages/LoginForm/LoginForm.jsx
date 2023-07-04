@@ -28,7 +28,7 @@ function LoginForm(props) {
     console.log(email, password);
     console.log(role);
     if (role === 'doctor') {
-      fetch('http://192.168.0.165:5000/doctor/login', {
+      fetch('http://localhost:5000/doctor/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ function LoginForm(props) {
         });
     }
     else {
-      fetch('http://192.168.0.165:5000/user/login', {
+      fetch('http://localhost:5000/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ function LoginForm(props) {
   const handleSignUp = (event) => {
     event.preventDefault();
     console.log(firstname, lastname, email, password);
-    fetch('http://192.168.0.165:5000/user/register', {
+    fetch('http://localhost:5000/user/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -7,7 +7,7 @@ import { useState } from "react";
 function Card(props) {
     const [specialization,setSpecialization] = useState();
     useEffect(()=>{
-        fetch(`http://192.168.0.165:5000/specializations/${props.content}`)
+        fetch(`http://localhost:5000/specializations/${props.content}`)
         .then((response)=>response.json())
         .then((data)=>{setSpecialization(data);})
     },[props.content])

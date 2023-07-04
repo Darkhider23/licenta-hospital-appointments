@@ -10,7 +10,7 @@ function BMICalculator() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://192.168.0.165:5000/bmi/calculate-bmi', {
+      const response = await fetch('http://localhost:5000/bmi/calculate-bmi', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

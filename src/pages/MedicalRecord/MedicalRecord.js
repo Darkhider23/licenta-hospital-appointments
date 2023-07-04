@@ -23,7 +23,7 @@ function MedicalRecord() {
     },
   };
   useEffect(() => {
-    fetch(`http://192.168.0.165:5000/user/${pacientid}`)
+    fetch(`http://localhost:5000/user/${pacientid}`)
       .then((response) => response.json())
       .then((data) => {
         setUser(data);
@@ -33,7 +33,7 @@ function MedicalRecord() {
       });
   }, []);
   useEffect(() => {
-    fetch(`http://192.168.0.165:5000/medical-records/user/${pacientid}`)
+    fetch(`http://localhost:5000/medical-records/user/${pacientid}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -46,7 +46,7 @@ function MedicalRecord() {
   const handleRecordChange = (e) => {
     e.preventDefault();
     console.log(record);
-    fetch(`http://192.168.0.165:5000/medical-records/${record.medicalRecordId}`, {
+    fetch(`http://localhost:5000/medical-records/${record.medicalRecordId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

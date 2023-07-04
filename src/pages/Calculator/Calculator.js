@@ -12,7 +12,7 @@ function Calculator() {
 
     const fetchItems = async () => {
         try {
-            const response = await fetch("http://192.168.0.165:5000/analisysprices"); // Replace with your API endpoint
+            const response = await fetch("http://localhost:5000/analisysprices"); // Replace with your API endpoint
             const data = await response.json();
             setItems(data);
         } catch (error) {

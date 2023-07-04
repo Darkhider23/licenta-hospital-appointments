@@ -27,7 +27,7 @@ function DoctorProfile() {
     },
   };
   useEffect(() => {
-    fetch(`http://192.168.0.165:5000/appointments/doctor-appointments/${userId}`)
+    fetch(`http://localhost:5000/appointments/doctor-appointments/${userId}`)
       .then((response) => response.json())
       .then((appointments) => {
         setAppointments(appointments);
@@ -41,7 +41,7 @@ function DoctorProfile() {
     const fetchDoctorForAppointment = async (appointment) => {
       try {
         const response = await fetch(
-          `http://192.168.0.165:5000/user/${appointment.userId}`
+          `http://localhost:5000/user/${appointment.userId}`
         );
         const doctor = await response.json();
         return doctor;
@@ -72,13 +72,13 @@ function DoctorProfile() {
   const handleCancelAppointment = (id, event) => {
     event.preventDefault();
     if (id) {
-      fetch(`http://192.168.0.165:5000/appointments/cancel/${id}`, {
+      fetch(`http://localhost:5000/appointments/cancel/${id}`, {
         method: 'PUT'
       })
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          fetch(`http://192.168.0.165:5000/email/${id}`)
+          fetch(`http://localhost:5000/email/${id}`)
             .then((response) => response.json())
             .then((data) => {
               console.log(data);
@@ -104,13 +104,13 @@ function DoctorProfile() {
   const handleConfirmAppointment = (id, event) => {
     event.preventDefault();
     if (id) {
-      fetch(`http://192.168.0.165:5000/appointments/confirm/${id}`, {
+      fetch(`http://localhost:5000/appointments/confirm/${id}`, {
         method: 'PUT'
       })
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          fetch(`http://192.168.0.165:5000/email/${id}`)
+          fetch(`http://localhost:5000/email/${id}`)
             .then((response) => response.json())
             .then((data) => {
               console.log(data);
@@ -137,7 +137,7 @@ function DoctorProfile() {
     event.preventDefault();
     console.log(selectedAppointment);
     if (id) {
-      fetch(`http://192.168.0.165:5000/appointments/${id}`, {
+      fetch(`http://localhost:5000/appointments/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

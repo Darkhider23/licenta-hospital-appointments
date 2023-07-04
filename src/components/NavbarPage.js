@@ -10,7 +10,7 @@ function NavbarPage(props) {
   const [role, setRole] = useState(localStorage.getItem('role'));
   useEffect(() => {
     if (role === 'patient') {
-      fetch(`http://192.168.0.165:5000/user/${userId}`, {
+      fetch(`http://localhost:5000/user/${userId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ function NavbarPage(props) {
         })
     }
     else if (role === 'doctor') {
-      fetch(`http://192.168.0.165:5000/doctor/${userId}`, {
+      fetch(`http://localhost:5000/doctor/${userId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
