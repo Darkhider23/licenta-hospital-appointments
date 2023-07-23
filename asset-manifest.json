@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/licenta-hospital-appointments/static/css/main.9161ba7e.css",
+    "main.js": "/licenta-hospital-appointments/static/js/main.5a5a9a03.js",
+    "static/js/787.6d258be1.chunk.js": "/licenta-hospital-appointments/static/js/787.6d258be1.chunk.js",
+    "static/media/RachelGarcia.jpg": "/licenta-hospital-appointments/static/media/RachelGarcia.3349d2b885d6139e4fd3.jpg",
+    "static/media/doctor3.jpg": "/licenta-hospital-appointments/static/media/doctor3.402ce66728dd5003407f.jpg",
+    "static/media/JonathanLee.jpg": "/licenta-hospital-appointments/static/media/JonathanLee.bc68a1ad33a600e75452.jpg",
+    "static/media/doctor2.jpg": "/licenta-hospital-appointments/static/media/doctor2.462a793ff716a37fe54d.jpg",
+    "static/media/background.jpg": "/licenta-hospital-appointments/static/media/background.cc3de5964769200ed5a1.jpg",
+    "static/media/logo.png": "/licenta-hospital-appointments/static/media/logo.54d6f4ac2d46ba80ccfc.png",
+    "index.html": "/licenta-hospital-appointments/index.html",
+    "main.9161ba7e.css.map": "/licenta-hospital-appointments/static/css/main.9161ba7e.css.map",
+    "main.5a5a9a03.js.map": "/licenta-hospital-appointments/static/js/main.5a5a9a03.js.map",
+    "787.6d258be1.chunk.js.map": "/licenta-hospital-appointments/static/js/787.6d258be1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9161ba7e.css",
+    "static/js/main.5a5a9a03.js"
+  ]
+}
